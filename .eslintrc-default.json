@@ -17,6 +17,7 @@
         "functions": "always-multiline"
       }
     ],
+    "react/prop-types": "off",
     "space-before-function-paren": [
       "error",
       {

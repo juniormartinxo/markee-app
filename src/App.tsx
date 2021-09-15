@@ -1,7 +1,7 @@
-import styled from 'styled-components/macro'
+import Title from './components/Title'
 
 function App() {
-  return <div>App</div>
+  return <Title />
 }
 
 export { App }
