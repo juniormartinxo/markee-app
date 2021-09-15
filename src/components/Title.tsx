@@ -1,7 +1,12 @@
+import { ReactNode } from 'react'
 import styled, { css } from 'styled-components/macro'
 
-function Title() {
-  return <TitleCss>App</TitleCss>
+type TitleProps = {
+  children: ReactNode | ReactNode[]
+}
+
+function Title({ children }: TitleProps) {
+  return <TitleCss>{children}</TitleCss>
 }
 
 const TitleCss = styled.h1`

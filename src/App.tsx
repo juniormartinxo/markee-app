@@ -1,7 +1,7 @@
 import Title from './components/Title'
 
 function App() {
-  return <Title />
+  return <Title> Markee App</Title>
 }
 
 export { App }
