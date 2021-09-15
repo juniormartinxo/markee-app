@@ -1,6 +1,49 @@
 {
+  "name": "markee-app",
+  "version": "0.0.1",
+  "private": true,
+  "script": {
+    "dev": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "lint": "yarn lint --fix",
+    "type-check": "tsc"
+  },
   "dependencies": {
+    "@testing-library/jest-dom": "5.14.1",
+    "@testing-library/react": "12.1.0",
+    "@testing-library/user-event": "13.2.1",
+    "@types/jest": "27.0.1",
+    "@types/node": "16.9.1",
+    "@types/react": "17.0.21",
     "@types/styled-components": "5.1.14",
-    "styled-components": "5.3.1"
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "react-scripts": "4.0.3",
+    "styled-components": "5.3.1",
+    "typescript": "4.4.3",
+    "web-vitals": "2.1.0"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist":{
+    "productions":[
+      "> 0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 edge version",
+      "last 1 ie version",
+      "last 1 opera version",
+      "last 1 safari version"
+    ]
   }
 }
