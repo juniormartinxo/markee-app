@@ -9,7 +9,7 @@
     "eject": "react-scripts eject",
     "lint": "eslint src --ext ts,tsx --no-eslintrc --config .eslintrc-default.json",
     "lint:fix": "yarn lint --fix",
-    "type-check": "tsc",
+    "type-check": "tsc --project tsconfig.json --pretty --noEmit",
     "prepare": "husky install"
   },
   "dependencies": {
