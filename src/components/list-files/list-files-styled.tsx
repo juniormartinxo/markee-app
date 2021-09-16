@@ -23,6 +23,7 @@ const LinkFilesStyled = styled.a`
   padding: 8px 10px;
   text-decoration: none;
   align-self: center;
+  border-radius: 3px;
 
   ${({ theme }) => css`
     color: ${theme.colors.white};
@@ -39,6 +40,7 @@ const ButtonsFilesStyled = styled.button`
   align-self: center;
   background-color: transparent;
   border: none;
+  margin: 15px;
 
   ${({ theme }) => css`
     color: ${theme.colors.white};

@@ -5,14 +5,63 @@ import {
   ButtonsFilesStyled,
 } from './list-files-styled'
 
+type filesListType = {
+  id: string
+  name: string
+  content: string
+  active: boolean
+  status: 'editing' | 'saving' | 'saved'
+}
+
+const filesList: filesListType[] = [
+  {
+    id: '1',
+    name: 'README.md',
+    content: '/',
+    active: true,
+    status: 'editing',
+  },
+  {
+    id: '2',
+    name: 'CONTRIBUTING.md',
+    content: '/',
+    active: false,
+    status: 'editing',
+  },
+  {
+    id: '3',
+    name: 'LICENSE.md',
+    content: '/',
+    active: false,
+    status: 'editing',
+  },
+  {
+    id: '4',
+    name: 'Links.md',
+    content: '/',
+    active: false,
+    status: 'editing',
+  },
+  {
+    id: '5',
+    name: 'roadmap.md',
+    content: '/',
+    active: false,
+    status: 'editing',
+  },
+]
+
 function ListFiles() {
   return (
     <ListFilesStyled>
-      <ItemFiles fileId="0" fileLink="/" fileName="README.md" />
-      <ItemFiles fileId="1" fileLink="/" fileName="CONTRIBUTING.md" />
-      <ItemFiles fileId="2" fileLink="/" fileName="LICENSE.md" />
-      <ItemFiles fileId="3" fileLink="/" fileName="Links.md" />
-      <ItemFiles fileId="4" fileLink="/" fileName="roadmap.md" />
+      {filesList.map((file) => (
+        <ItemFiles
+          key={file.id}
+          fileId={file.id}
+          fileLink={file.content}
+          fileName={file.name}
+        />
+      ))}
     </ListFilesStyled>
   )
 }
