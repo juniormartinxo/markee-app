@@ -1,13 +1,4 @@
 import styled, { css } from 'styled-components/macro'
-import { Logo } from 'logo'
-
-function Sidebar() {
-  return (
-    <SidebarStyled>
-      <Logo />
-    </SidebarStyled>
-  )
-}
 
 const SidebarStyled = styled.div`
   grid-area: sidebar;
@@ -18,4 +9,4 @@ const SidebarStyled = styled.div`
   `}
 `
 
-export default Sidebar
+export default SidebarStyled
