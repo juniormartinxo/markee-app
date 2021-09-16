@@ -3,6 +3,7 @@ import SidebarStyled from './sidebar-styled'
 import { TitleLinethrough } from 'components/title-linethrough'
 import { ButtonAddFile } from 'components/button-add-file'
 import { ContainerButtonsSidebar } from 'components/container-buttons-sidebar'
+import { ListFiles } from 'components/list-files'
 
 function Sidebar() {
   return (
@@ -12,6 +13,7 @@ function Sidebar() {
       <ContainerButtonsSidebar>
         <ButtonAddFile />
       </ContainerButtonsSidebar>
+      <ListFiles />
     </SidebarStyled>
   )
 }
