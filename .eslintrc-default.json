@@ -8,6 +8,7 @@
   ],
   "rules": {
     "semi": [2, "never"],
+    "jsx-quotes": ["error", "prefer-double"],
     "comma-dangle": [
       "error",
       {

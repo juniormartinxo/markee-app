@@ -1,7 +1,14 @@
-import Title from './components/Title'
+import Content from 'grid/content'
+import Main from 'grid/main'
+import Sidebar from 'grid/sidebar'
 
 function App() {
-  return <Title> Markee App</Title>
+  return (
+    <Main>
+      <Sidebar />
+      <Content>Content</Content>
+    </Main>
+  )
 }
 
 export { App }

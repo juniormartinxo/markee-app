@@ -8,4 +8,11 @@ export const theme: DefaultTheme = {
     gray: '#E4E5E7',
     white: '#FAFAFA',
   },
+
+  breakpoints: {
+    mobile: '414px',
+    tablet: '768px',
+    desktop: '1024px',
+    desktopL: '1440px',
+  },
 }
