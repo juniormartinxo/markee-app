@@ -1,16 +1,5 @@
 import styled, { css } from 'styled-components/macro'
 
-function Logo() {
-  return (
-    <LogoBox>
-      <LogoImg src="favicon.png" alt="" />
-      <LogoTitle>
-        markee<LogoSpan>.</LogoSpan>
-      </LogoTitle>
-    </LogoBox>
-  )
-}
-
 const LogoBox = styled.div`
   padding: 10px;
   display: flex;
@@ -50,4 +39,4 @@ const LogoSpan = styled.span`
   `}
 `
 
-export { Logo }
+export { LogoBox, LogoImg, LogoTitle, LogoSpan }

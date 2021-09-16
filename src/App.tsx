@@ -1,6 +1,6 @@
-import Content from 'grid/content'
-import Main from 'grid/main'
-import Sidebar from 'grid/sidebar'
+import { Content } from 'components/content'
+import Main from 'components/main/main'
+import { Sidebar } from 'components/sidebar'
 
 function App() {
   return (
