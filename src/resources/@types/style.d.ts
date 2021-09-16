@@ -7,6 +7,10 @@ declare module 'styled-components' {
       white: string
       gray: string
     }
+    fonts: {
+      primary: string
+      secondary: string
+    }
     breakpoints: {
       mobile: string
       tablet: string

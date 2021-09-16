@@ -8,7 +8,10 @@ export const theme: DefaultTheme = {
     gray: '#E4E5E7',
     white: '#FAFAFA',
   },
-
+  fonts: {
+    primary: '"Inconsolata", sans-serif;',
+    secondary: '"DM Sans", sans-serif',
+  },
   breakpoints: {
     mobile: '414px',
     tablet: '768px',

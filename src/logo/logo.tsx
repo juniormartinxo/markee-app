@@ -1,15 +1,53 @@
-import styled from 'styled-components/macro'
+import styled, { css } from 'styled-components/macro'
 
 function Logo() {
   return (
     <LogoBox>
-      <img src="favicon.png" alt="" />
+      <LogoImg src="favicon.png" alt="" />
+      <LogoTitle>
+        markee<LogoSpan>.</LogoSpan>
+      </LogoTitle>
     </LogoBox>
   )
 }
 
 const LogoBox = styled.div`
-  width: 100%;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  margin-top: 47.42px;
+`
+
+const LogoImg = styled.img`
+  width: 35.89px;
+  height: 40.29px;
+`
+
+const LogoTitle = styled.h1`
+  font-size: 33.84px;
+  line-height: 44.06px;
+  letter-spacing: -8%;
+  font-weight: bold;
+  margin: 0;
+  padding: 0;
+  margin-left: 12.89px;
+  font-weight: 700;
+  font-size: 33.84px;
+
+  ${({ theme }) => css`
+    color: ${theme.colors.white};
+    font-family: ${theme.fonts.secondary};
+  `}
+`
+
+const LogoSpan = styled.span`
+  font-weight: bold;
+  margin: 0;
+  padding: 0;
+
+  ${({ theme }) => css`
+    color: ${theme.colors.primary};
+  `}
 `
 
 export { Logo }
