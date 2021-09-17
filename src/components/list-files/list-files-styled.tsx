@@ -6,21 +6,50 @@ const ListFilesStyled = styled.ul`
   padding: 15px;
 `
 
-const ItemFilesStyled = styled.li`
+const ButtonsFilesStyled = styled.button`
+  align-self: center;
+  background-color: transparent;
+  border: none;
+  margin: 15px;
+  cursor: pointer;
+  display: none;
+
+  ${({ theme }) => css`
+    color: ${theme.colors.white};
+  `}
+
+  &:hover {
+    ${({ theme }) => css`
+      color: ${theme.colors.primary};
+    `}
+  }
+`
+
+type ItemFilesStyledProps = {
+  fileStatus: string
+}
+
+const ItemFilesStyled = styled.li<ItemFilesStyledProps>`
   display: flex;
   justify-content: space-between;
   width: 100%;
+  background-color: ${(props) =>
+    props.fileStatus === 'editing' && props.theme.colors.lightBlack};
 
-  ${({ theme }) => css`
-    &:hover {
+  &:hover {
+    ${({ theme }) => css`
       background: ${theme.colors.lightBlack};
+    `}
+
+    ${ButtonsFilesStyled} {
+      display: block;
     }
-  `}
+  }
 `
 
 const LinkFilesStyled = styled.a`
   width: 100%;
-  padding: 8px 10px;
+  padding: 15px 10px;
   text-decoration: none;
   align-self: center;
   border-radius: 3px;
@@ -36,27 +65,6 @@ const LinkFilesStyled = styled.a`
       background: ${theme.colors.lightBlack};
     }
   `}
-`
-
-const ButtonsFilesStyled = styled.button`
-  align-self: center;
-  background-color: transparent;
-  border: none;
-  margin: 15px;
-  padding: 0 5px;
-  cursor: pointer;
-  border-radius: 50%;
-
-  ${({ theme }) => css`
-    color: ${theme.colors.white};
-  `}
-
-  &:hover {
-    ${({ theme }) => css`
-      color: ${theme.colors.black};
-      background-color: ${theme.colors.primary};
-    `}
-  }
 `
 
 export { ListFilesStyled, ItemFilesStyled, LinkFilesStyled, ButtonsFilesStyled }

@@ -61,6 +61,7 @@ function ListFiles() {
           fileId={file.id}
           fileLink={file.content}
           fileName={file.name}
+          fileStatus={file.status}
         />
       ))}
     </ListFilesStyled>
@@ -71,11 +72,12 @@ type ItemFilesProps = {
   fileId: string
   fileLink: string
   fileName: string
+  fileStatus: string
 }
 
-function ItemFiles({ fileId, fileLink, fileName }: ItemFilesProps) {
+function ItemFiles({ fileId, fileLink, fileName, fileStatus }: ItemFilesProps) {
   return (
-    <ItemFilesStyled key={fileId}>
+    <ItemFilesStyled key={fileId} fileStatus={fileStatus}>
       <LinkFiles fileLink={fileLink} fileName={fileName} />
       <ButtonsFilesStyled>x</ButtonsFilesStyled>
     </ItemFilesStyled>
