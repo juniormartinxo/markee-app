@@ -6,7 +6,7 @@ function App() {
   return (
     <Main>
       <Sidebar />
-      <Content>Content</Content>
+      <Content />
     </Main>
   )
 }

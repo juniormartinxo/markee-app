@@ -5,7 +5,7 @@ import {
   ButtonsFilesStyled,
 } from './list-files-styled'
 
-type filesListType = {
+type fileListType = {
   id: string
   name: string
   content: string
@@ -13,7 +13,7 @@ type filesListType = {
   status: 'editing' | 'saving' | 'saved'
 }
 
-const filesList: filesListType[] = [
+const filesList: fileListType[] = [
   {
     id: '1',
     name: 'README.md',
