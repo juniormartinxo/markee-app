@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components/macro'
 
 const TitleLinethroughBox = styled.div`
   display: block;
-  margin: 58.3px 15px 15px 15px;
+  margin: 40px 15px 15px 15px;
   border-top: 2px solid ${({ theme }) => theme.colors.primary};
 `
 

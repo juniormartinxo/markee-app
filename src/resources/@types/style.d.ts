@@ -2,6 +2,7 @@ declare module 'styled-components' {
   export interface DefaultTheme {
     colors: {
       primary: string
+      primaryHover: string
       black: string
       lightBlack: string
       white: string
@@ -10,6 +11,11 @@ declare module 'styled-components' {
     fonts: {
       primary: string
       secondary: string
+    }
+    fontSizes: {
+      small: string
+      medium: string
+      large: string
     }
     breakpoints: {
       mobile: string

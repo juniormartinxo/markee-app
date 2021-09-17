@@ -1,6 +1,6 @@
 import { LogoBox, LogoImg, LogoTitle, LogoSpan } from './logo-styled'
 
-function Logo() {
+function Logo () {
   return (
     <LogoBox>
       <LogoImg src="favicon.png" alt="" />
