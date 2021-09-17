@@ -51,7 +51,7 @@ const filesList: fileListType[] = [
   },
 ]
 
-function ListFiles() {
+function ListFiles () {
   return (
     <ListFilesStyled>
       {filesList.map((file) => (
@@ -72,7 +72,7 @@ type ItemFilesProps = {
   fileName: string
 }
 
-function ItemFiles({ fileId, fileLink, fileName }: ItemFilesProps) {
+function ItemFiles ({ fileId, fileLink, fileName }: ItemFilesProps) {
   return (
     <ItemFilesStyled key={fileId}>
       <LinkFiles fileLink={fileLink} fileName={fileName} />
@@ -85,7 +85,7 @@ type LinkFilesProps = {
   fileLink: string
   fileName: string
 }
-function LinkFiles({ fileLink, fileName }: LinkFilesProps) {
+function LinkFiles ({ fileLink, fileName }: LinkFilesProps) {
   return (
     <LinkFilesStyled href={fileLink}>
       <IcoFile />
@@ -94,7 +94,7 @@ function LinkFiles({ fileLink, fileName }: LinkFilesProps) {
   )
 }
 
-function IcoFile() {
+function IcoFile () {
   return (
     <span>
       <img src="../../public/file-ico.png" alt="" />

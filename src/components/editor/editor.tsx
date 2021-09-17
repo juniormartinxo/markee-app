@@ -1,6 +1,6 @@
 import EditorStyled from './editor-styled'
 
-function Editor() {
+function Editor () {
   return (
     <EditorStyled>
       <p>Editor</p>

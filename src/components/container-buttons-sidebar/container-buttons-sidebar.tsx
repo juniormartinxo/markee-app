@@ -5,7 +5,7 @@ type ContainerButtonsSidebarProps = {
   children: ReactNode | ReactNode[]
 }
 
-function ContainerButtonsSidebar({ children }: ContainerButtonsSidebarProps) {
+function ContainerButtonsSidebar ({ children }: ContainerButtonsSidebarProps) {
   return (
     <ContainerButtonsSidebarStyled>{children}</ContainerButtonsSidebarStyled>
   )

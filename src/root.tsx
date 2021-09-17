@@ -5,7 +5,7 @@ import { theme } from 'resources/theme'
 
 import 'normalize.css'
 
-function Root() {
+function Root () {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />

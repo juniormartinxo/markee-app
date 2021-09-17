@@ -1,6 +1,6 @@
 import ViewerStyled from './viewer-styled'
 
-function Viewer() {
+function Viewer () {
   return (
     <ViewerStyled>
       <p>Viewer</p>

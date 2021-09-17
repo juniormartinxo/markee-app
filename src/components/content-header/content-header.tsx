@@ -1,6 +1,6 @@
 import ContentHeaderStyled from './content-header-styled'
 
-function ContentHeader() {
+function ContentHeader () {
   return (
     <ContentHeaderStyled>
       <input type="text" />
