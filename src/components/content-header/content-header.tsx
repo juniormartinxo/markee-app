@@ -1,9 +1,11 @@
-import ContentHeaderStyled from './content-header-styled'
+import { ContentHeaderStyled, InputFileStyled } from './content-header-styled'
+import { IcoImage } from 'components/ico-image'
 
 function ContentHeader() {
   return (
     <ContentHeaderStyled>
-      <input type="text" />
+      <IcoImage pathImage="ico-file-green.png" />
+      <InputFileStyled value="CONTRIBUT" />
     </ContentHeaderStyled>
   )
 }

@@ -24,6 +24,8 @@ const LinkFilesStyled = styled.a`
   text-decoration: none;
   align-self: center;
   border-radius: 3px;
+  display: flex;
+  align-items: center;
 
   ${({ theme }) => css`
     color: ${theme.colors.white};
@@ -41,10 +43,20 @@ const ButtonsFilesStyled = styled.button`
   background-color: transparent;
   border: none;
   margin: 15px;
+  padding: 0 5px;
+  cursor: pointer;
+  border-radius: 50%;
 
   ${({ theme }) => css`
     color: ${theme.colors.white};
   `}
+
+  &:hover {
+    ${({ theme }) => css`
+      color: ${theme.colors.black};
+      background-color: ${theme.colors.primary};
+    `}
+  }
 `
 
 export { ListFilesStyled, ItemFilesStyled, LinkFilesStyled, ButtonsFilesStyled }

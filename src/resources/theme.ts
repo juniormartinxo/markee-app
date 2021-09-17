@@ -13,6 +13,11 @@ export const theme: DefaultTheme = {
     primary: '"Inconsolata", sans-serif;',
     secondary: '"DM Sans", sans-serif',
   },
+  fontSizes: {
+    small: '1.2rem',
+    medium: '1.6rem',
+    large: '2.4rem',
+  },
   breakpoints: {
     mobile: '414px',
     tablet: '768px',

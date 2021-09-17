@@ -12,6 +12,11 @@ declare module 'styled-components' {
       primary: string
       secondary: string
     }
+    fontSizes: {
+      small: string
+      medium: string
+      large: string
+    }
     breakpoints: {
       mobile: string
       tablet: string

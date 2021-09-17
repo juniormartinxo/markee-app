@@ -4,6 +4,7 @@ import {
   LinkFilesStyled,
   ButtonsFilesStyled,
 } from './list-files-styled'
+import { IcoImage } from 'components/ico-image'
 
 type fileListType = {
   id: string
@@ -19,7 +20,7 @@ const filesList: fileListType[] = [
     name: 'README.md',
     content: '/',
     active: true,
-    status: 'editing',
+    status: 'saved',
   },
   {
     id: '2',
@@ -33,21 +34,21 @@ const filesList: fileListType[] = [
     name: 'LICENSE.md',
     content: '/',
     active: false,
-    status: 'editing',
+    status: 'saved',
   },
   {
     id: '4',
     name: 'Links.md',
     content: '/',
     active: false,
-    status: 'editing',
+    status: 'saved',
   },
   {
     id: '5',
     name: 'roadmap.md',
     content: '/',
     active: false,
-    status: 'editing',
+    status: 'saving',
   },
 ]
 
@@ -88,17 +89,9 @@ type LinkFilesProps = {
 function LinkFiles({ fileLink, fileName }: LinkFilesProps) {
   return (
     <LinkFilesStyled href={fileLink}>
-      <IcoFile />
+      <IcoImage pathImage="ico-file.png" />
       {fileName}
     </LinkFilesStyled>
-  )
-}
-
-function IcoFile() {
-  return (
-    <span>
-      <img src="../../public/file-ico.png" alt="" />
-    </span>
   )
 }
 
