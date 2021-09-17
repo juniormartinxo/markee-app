@@ -4,6 +4,7 @@ import {
   LinkFilesStyled,
   ButtonsFilesStyled,
 } from './list-files-styled'
+import { IcoImage } from 'components/ico-image'
 
 type fileListType = {
   id: string
@@ -18,14 +19,14 @@ const filesList: fileListType[] = [
     id: '1',
     name: 'README.md',
     content: '/',
-    active: true,
-    status: 'editing',
+    active: false,
+    status: 'saved',
   },
   {
     id: '2',
     name: 'CONTRIBUTING.md',
     content: '/',
-    active: false,
+    active: true,
     status: 'editing',
   },
   {
@@ -33,25 +34,25 @@ const filesList: fileListType[] = [
     name: 'LICENSE.md',
     content: '/',
     active: false,
-    status: 'editing',
+    status: 'saved',
   },
   {
     id: '4',
     name: 'Links.md',
     content: '/',
     active: false,
-    status: 'editing',
+    status: 'saved',
   },
   {
     id: '5',
     name: 'roadmap.md',
     content: '/',
     active: false,
-    status: 'editing',
+    status: 'saved',
   },
 ]
 
-function ListFiles () {
+function ListFiles() {
   return (
     <ListFilesStyled>
       {filesList.map((file) => (
@@ -60,6 +61,8 @@ function ListFiles () {
           fileId={file.id}
           fileLink={file.content}
           fileName={file.name}
+          fileActive={file.active}
+          fileStatus={file.status}
         />
       ))}
     </ListFilesStyled>
@@ -70,13 +73,44 @@ type ItemFilesProps = {
   fileId: string
   fileLink: string
   fileName: string
+  fileActive: boolean
+  fileStatus: string
 }
 
-function ItemFiles ({ fileId, fileLink, fileName }: ItemFilesProps) {
+function ItemFiles({
+  fileId,
+  fileLink,
+  fileName,
+  fileActive,
+  fileStatus,
+}: ItemFilesProps) {
+  function getIco(fileStatus: string) {
+    if (fileStatus === 'editing' && fileActive) {
+      return '●'
+    }
+    if (fileStatus === 'saving' && fileActive) {
+      return '⟳'
+    }
+    if (fileStatus === 'saved' && fileActive) {
+      return '✓'
+    }
+    if (!fileActive) {
+      return 'x'
+    }
+  }
+
   return (
-    <ItemFilesStyled key={fileId}>
-      <LinkFiles fileLink={fileLink} fileName={fileName} />
-      <ButtonsFilesStyled>x</ButtonsFilesStyled>
+    <ItemFilesStyled
+      key={fileId}
+      fileStatus={fileStatus}
+      fileActive={fileActive}
+    >
+      <LinkFiles
+        fileLink={fileLink}
+        fileName={fileName}
+        fileActive={fileActive}
+      />
+      <ButtonsFilesStyled>{getIco(fileStatus)}</ButtonsFilesStyled>
     </ItemFilesStyled>
   )
 }
@@ -84,21 +118,16 @@ function ItemFiles ({ fileId, fileLink, fileName }: ItemFilesProps) {
 type LinkFilesProps = {
   fileLink: string
   fileName: string
+  fileActive: boolean
 }
-function LinkFiles ({ fileLink, fileName }: LinkFilesProps) {
+function LinkFiles({ fileLink, fileName, fileActive }: LinkFilesProps) {
   return (
     <LinkFilesStyled href={fileLink}>
-      <IcoFile />
+      <IcoImage
+        pathImage={fileActive ? 'ico-file-green.png' : 'ico-file.png'}
+      />
       {fileName}
     </LinkFilesStyled>
-  )
-}
-
-function IcoFile () {
-  return (
-    <span>
-      <img src="../../public/file-ico.png" alt="" />
-    </span>
   )
 }
 

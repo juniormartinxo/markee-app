@@ -6,24 +6,62 @@ const ListFilesStyled = styled.ul`
   padding: 15px;
 `
 
-const ItemFilesStyled = styled.li`
+const ButtonsFilesStyled = styled.button`
+  align-self: center;
+  background-color: transparent;
+  border: none;
+  margin: 15px;
+  cursor: pointer;
+  display: none;
+
+  ${({ theme }) => css`
+    color: ${theme.colors.white};
+  `}
+
+  &:hover {
+    ${({ theme }) => css`
+      color: ${theme.colors.primary};
+    `}
+  }
+`
+
+type ItemFilesStyledProps = {
+  fileStatus: string
+  fileActive: boolean
+}
+
+const ItemFilesStyled = styled.li<ItemFilesStyledProps>`
   display: flex;
   justify-content: space-between;
   width: 100%;
+  background-color: ${(props) =>
+    props.fileStatus === 'editing' && props.theme.colors.lightBlack};
 
-  ${({ theme }) => css`
-    &:hover {
+  ${ButtonsFilesStyled} {
+    display: ${(props) => props.fileStatus === 'editing' && 'block'};
+    color: ${(props) =>
+      props.fileActive === true && props.theme.colors.primary};
+  }
+
+  &:hover {
+    ${({ theme }) => css`
       background: ${theme.colors.lightBlack};
+    `}
+
+    ${ButtonsFilesStyled} {
+      display: block;
     }
-  `}
+  }
 `
 
 const LinkFilesStyled = styled.a`
   width: 100%;
-  padding: 8px 10px;
+  padding: 15px 10px;
   text-decoration: none;
   align-self: center;
   border-radius: 3px;
+  display: flex;
+  align-items: center;
 
   ${({ theme }) => css`
     color: ${theme.colors.white};
@@ -33,17 +71,6 @@ const LinkFilesStyled = styled.a`
     &:hover {
       background: ${theme.colors.lightBlack};
     }
-  `}
-`
-
-const ButtonsFilesStyled = styled.button`
-  align-self: center;
-  background-color: transparent;
-  border: none;
-  margin: 15px;
-
-  ${({ theme }) => css`
-    color: ${theme.colors.white};
   `}
 `
 

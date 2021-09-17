@@ -1,10 +1,23 @@
-import EditorStyled from './editor-styled'
+import { EditorStyled, TextEditorStyled } from './editor-styled'
 
 function Editor () {
   return (
     <EditorStyled>
-      <p>Editor</p>
+      <TextEditor />
     </EditorStyled>
+  )
+}
+
+function TextEditor() {
+  return (
+    <TextEditorStyled
+      name=""
+      id=""
+      readOnly
+      defaultValue={
+        '## Bootcamp Brainn Co.\r\nLorem ipsum dolor sit amet simet'
+      }
+    />
   )
 }
 

@@ -1,7 +1,31 @@
-import styled from 'styled-components/macro'
+import styled, { css } from 'styled-components/macro'
 
 const ContentHeaderStyled = styled.div`
   grid-area: content-header;
+  display: flex;
+  align-items: center;
+  padding: 0 25px;
 `
 
-export default ContentHeaderStyled
+const InputFileStyled = styled.input`
+  border: 0;
+  clip: rect(0 0 0 0);
+  background-color: transparent;
+  width: 300px;
+
+  ${({ theme }) => css`
+    font-family: ${theme.fonts.secondary};
+    font-weight: 500;
+    font-size: ${theme.fontSizes.small};
+  `};
+
+  :focus {
+    outline: none;
+
+    ${({ theme }) => css`
+      border-bottom: 2px solid ${theme.colors.primary};
+    `};
+  }
+`
+
+export { ContentHeaderStyled, InputFileStyled }
