@@ -27,6 +27,7 @@ const ButtonsFilesStyled = styled.button`
 
 type ItemFilesStyledProps = {
   fileStatus: string
+  fileActive: boolean
 }
 
 const ItemFilesStyled = styled.li<ItemFilesStyledProps>`
@@ -35,6 +36,12 @@ const ItemFilesStyled = styled.li<ItemFilesStyledProps>`
   width: 100%;
   background-color: ${(props) =>
     props.fileStatus === 'editing' && props.theme.colors.lightBlack};
+
+  ${ButtonsFilesStyled} {
+    display: ${(props) => props.fileStatus === 'editing' && 'block'};
+    color: ${(props) =>
+      props.fileActive === true && props.theme.colors.primary};
+  }
 
   &:hover {
     ${({ theme }) => css`
