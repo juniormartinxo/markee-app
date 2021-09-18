@@ -3,9 +3,10 @@ import {
   ItemFilesStyled,
   LinkFilesStyled,
   ButtonsFilesStyled,
+  TextLinkStyled,
 } from './list-files-styled'
-import { IcoImage } from 'components/ico-image'
 import { FileList } from 'resources/files/types'
+import * as Icon from 'ui/icons'
 
 const filesList: FileList[] = [
   {
@@ -116,10 +117,8 @@ export type LinkFilesProps = {
 function LinkFiles({ fileLink, fileName, fileActive }: LinkFilesProps) {
   return (
     <LinkFilesStyled href={fileLink}>
-      <IcoImage
-        pathImage={fileActive ? 'ico-file-green.png' : 'ico-file.png'}
-      />
-      {fileName}
+      {!fileActive ? <Icon.File /> : <Icon.FileActive />}
+      <TextLinkStyled>{fileName}</TextLinkStyled>
     </LinkFilesStyled>
   )
 }

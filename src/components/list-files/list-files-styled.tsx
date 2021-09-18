@@ -40,6 +40,10 @@ const ItemFilesStyled = styled.li<ItemFilesStyledProps>`
       color: ${() => props.fileActive === true && props.theme.colors.primary};
     }
 
+    ${TextLinkStyled} {
+      color: ${() => props.fileActive === true && props.theme.colors.primary};
+    }
+
     &:hover {
       background: ${props.theme.colors.lightBlack};
       ${ButtonsFilesStyled} {
@@ -69,4 +73,20 @@ const LinkFilesStyled = styled.a`
   `}
 `
 
-export { ListFilesStyled, ItemFilesStyled, LinkFilesStyled, ButtonsFilesStyled }
+const TextLinkStyled = styled.span`
+  ${({ theme }) => css`
+    color: ${theme.colors.white};
+    font-family: ${theme.fonts.secondary};
+    font-weight: 400;
+    line-height: 20.83px;
+    margin-left: 15px;
+  `}
+`
+
+export {
+  ListFilesStyled,
+  ItemFilesStyled,
+  LinkFilesStyled,
+  ButtonsFilesStyled,
+  TextLinkStyled,
+}
