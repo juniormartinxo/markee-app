@@ -1,7 +1,5 @@
 import styled, { css } from 'styled-components/macro'
 
-import * as icon from 'ui/icons'
-
 const transitionStart = '0.2s'
 const transitionEnd = '0.3s'
 
@@ -30,28 +28,6 @@ const ButtonsFilesStyled = styled.button`
       transition: ${transitionStart} linear color;
     }
   `}
-`
-
-const DefaultButton = styled.button`
-  cursor: pointer;
-`
-
-const RemoveButtonStyled = styled(DefaultButton)`
-  background: transparent;
-  border: 0;
-  display: none;
-  margin: 0 0 0 auto;
-  padding: 0;
-  position: absolute;
-  right: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 12px;
-`
-
-const RemoveIcon = styled(icon.Plus)`
-  margin: 0;
-  transform: rotate(45deg);
 `
 
 type ItemFilesStyledProps = {
@@ -124,6 +100,4 @@ export {
   LinkFilesStyled,
   ButtonsFilesStyled,
   TextLinkStyled,
-  RemoveIcon,
-  RemoveButtonStyled,
 }

@@ -4,8 +4,6 @@ import {
   LinkFilesStyled,
   ButtonsFilesStyled,
   TextLinkStyled,
-  RemoveIcon,
-  RemoveButtonStyled,
 } from './list-files-styled'
 
 import { FileList, Status } from 'resources/files/types'
