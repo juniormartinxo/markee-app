@@ -1,6 +1,6 @@
 import { EditorStyled, TextEditorStyled } from './editor-styled'
 
-function Editor () {
+function Editor() {
   return (
     <EditorStyled>
       <TextEditor />

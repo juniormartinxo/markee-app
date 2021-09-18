@@ -5,7 +5,7 @@ type MainProps = {
   children: ReactNode | ReactNode[]
 }
 
-function Main ({ children }: MainProps) {
+function Main({ children }: MainProps) {
   return <MainStyled>{children}</MainStyled>
 }
 
