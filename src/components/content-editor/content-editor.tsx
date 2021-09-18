@@ -5,7 +5,7 @@ type ContentEditorProps = {
   children: ReactNode
 }
 
-function ContentEditor ({ children }: ContentEditorProps) {
+function ContentEditor({ children }: ContentEditorProps) {
   return <ContentEditoStyled>{children}</ContentEditoStyled>
 }
 

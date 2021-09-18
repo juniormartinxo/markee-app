@@ -10,7 +10,7 @@ type ContentProps = {
 }
 */
 
-function Content () {
+function Content() {
   return (
     <ContentStyled>
       <ContentHeader />

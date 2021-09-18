@@ -1,7 +1,7 @@
 import { ContentHeaderStyled, InputFileStyled } from './content-header-styled'
 import { IcoImage } from 'components/ico-image'
 
-function ContentHeader () {
+function ContentHeader() {
   return (
     <ContentHeaderStyled>
       <IcoImage pathImage="ico-file-green.png" />
