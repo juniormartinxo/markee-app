@@ -5,16 +5,9 @@ import {
   ButtonsFilesStyled,
 } from './list-files-styled'
 import { IcoImage } from 'components/ico-image'
+import { FileList } from 'resources/files/types'
 
-type fileListType = {
-  id: string
-  name: string
-  content: string
-  active: boolean
-  status: 'editing' | 'saving' | 'saved'
-}
-
-const filesList: fileListType[] = [
+const filesList: FileList[] = [
   {
     id: '1',
     name: 'README.md',
@@ -68,8 +61,7 @@ function ListFiles() {
     </ListFilesStyled>
   )
 }
-
-type ItemFilesProps = {
+export type ItemFilesProps = {
   fileId: string
   fileLink: string
   fileName: string
@@ -115,11 +107,12 @@ function ItemFiles({
   )
 }
 
-type LinkFilesProps = {
+export type LinkFilesProps = {
   fileLink: string
   fileName: string
   fileActive: boolean
 }
+
 function LinkFiles({ fileLink, fileName, fileActive }: LinkFilesProps) {
   return (
     <LinkFilesStyled href={fileLink}>

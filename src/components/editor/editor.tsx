@@ -10,14 +10,7 @@ function Editor() {
 
 function TextEditor() {
   return (
-    <TextEditorStyled
-      name=""
-      id=""
-      readOnly
-      defaultValue={
-        '## Bootcamp Brainn Co.\r\nLorem ipsum dolor sit amet simet'
-      }
-    />
+    <TextEditorStyled name="" id="" placeholder="Digite aqui o seu markdown" />
   )
 }
 

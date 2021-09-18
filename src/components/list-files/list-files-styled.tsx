@@ -7,22 +7,19 @@ const ListFilesStyled = styled.ul`
 `
 
 const ButtonsFilesStyled = styled.button`
-  align-self: center;
-  background-color: transparent;
-  border: none;
-  margin: 15px;
-  cursor: pointer;
-  display: none;
-
   ${({ theme }) => css`
+    align-self: center;
+    background-color: transparent;
+    border: none;
+    margin: 15px;
+    cursor: pointer;
+    display: none;
     color: ${theme.colors.white};
-  `}
 
-  &:hover {
-    ${({ theme }) => css`
+    &:hover {
       color: ${theme.colors.primary};
-    `}
-  }
+    }
+  `}
 `
 
 type ItemFilesStyledProps = {
@@ -31,43 +28,41 @@ type ItemFilesStyledProps = {
 }
 
 const ItemFilesStyled = styled.li<ItemFilesStyledProps>`
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  background-color: ${(props) =>
-    props.fileStatus === 'editing' && props.theme.colors.lightBlack};
-
-  ${ButtonsFilesStyled} {
-    display: ${(props) => props.fileStatus === 'editing' && 'block'};
-    color: ${(props) =>
-      props.fileActive === true && props.theme.colors.primary};
-  }
-
-  &:hover {
-    ${({ theme }) => css`
-      background: ${theme.colors.lightBlack};
-    `}
+  ${(props) => css`
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    background-color: ${() =>
+      props.fileStatus === 'editing' && props.theme.colors.lightBlack};
 
     ${ButtonsFilesStyled} {
-      display: block;
+      display: ${() => props.fileStatus === 'editing' && 'block'};
+      color: ${() => props.fileActive === true && props.theme.colors.primary};
     }
-  }
+
+    &:hover {
+      background: ${props.theme.colors.lightBlack};
+      ${ButtonsFilesStyled} {
+        display: block;
+      }
+    }
+  `}
 `
 
 const LinkFilesStyled = styled.a`
-  width: 100%;
-  padding: 15px 10px;
-  text-decoration: none;
-  align-self: center;
-  border-radius: 3px;
-  display: flex;
-  align-items: center;
-
   ${({ theme }) => css`
+    width: 100%;
+    padding: 15px 10px;
+    text-decoration: none;
+    align-self: center;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
     color: ${theme.colors.white};
     font-family: ${theme.fonts.secondary};
     font-weight: 400;
     line-height: 20.83px;
+
     &:hover {
       background: ${theme.colors.lightBlack};
     }
