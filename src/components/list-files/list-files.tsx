@@ -4,9 +4,13 @@ import {
   LinkFilesStyled,
   ButtonsFilesStyled,
   TextLinkStyled,
+  RemoveIcon,
+  RemoveButtonStyled,
 } from './list-files-styled'
-import { FileList } from 'resources/files/types'
+
+import { FileList, Status } from 'resources/files/types'
 import * as Icon from 'ui/icons'
+import { StatusIconStyled } from 'components/status-icon/status-icon-styled'
 
 const filesList: FileList[] = [
   {
@@ -67,7 +71,7 @@ export type ItemFilesProps = {
   fileLink: string
   fileName: string
   fileActive: boolean
-  fileStatus: string
+  fileStatus: Status
 }
 
 function ItemFiles({
@@ -77,21 +81,6 @@ function ItemFiles({
   fileActive,
   fileStatus,
 }: ItemFilesProps) {
-  function getIco(fileStatus: string) {
-    if (fileStatus === 'editing' && fileActive) {
-      return '●'
-    }
-    if (fileStatus === 'saving' && fileActive) {
-      return '⟳'
-    }
-    if (fileStatus === 'saved' && fileActive) {
-      return '✓'
-    }
-    if (!fileActive) {
-      return 'x'
-    }
-  }
-
   return (
     <ItemFilesStyled
       key={fileId}
@@ -103,7 +92,13 @@ function ItemFiles({
         fileName={fileName}
         fileActive={fileActive}
       />
-      <ButtonsFilesStyled>{getIco(fileStatus)}</ButtonsFilesStyled>
+      {fileActive && <StatusIconStyled status={fileStatus} />}
+
+      {!fileActive && (
+        <ButtonsFilesStyled title={`Remover o arquivo ${fileName}`}>
+          <Icon.FileRemove />
+        </ButtonsFilesStyled>
+      )}
     </ItemFilesStyled>
   )
 }

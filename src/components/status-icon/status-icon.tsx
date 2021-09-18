@@ -1,5 +1,5 @@
-import styled, { keyframes } from 'styled-components/macro'
 import { Status } from 'resources/files/types'
+import { Loading, Edit } from './status-icon-styled'
 import * as icon from 'ui/icons'
 
 export type StatusIconProps = {
@@ -14,22 +14,6 @@ export function StatusIcon({ status = 'saved', className }: StatusIconProps) {
     editing: Edit,
   }[status]
 
+  // if (!Comp) return null
   return <Comp className={className} />
 }
-
-const Edit = styled(icon.Ellipse)`
-  margin-right: 2px;
-`
-
-const rotation = keyframes`
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(359deg);
-  }
-`
-
-const Loading = styled(icon.Loading)`
-  animation: ${rotation} 1s infinite linear;
-`
