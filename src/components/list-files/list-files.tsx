@@ -3,18 +3,14 @@ import {
   ItemFilesStyled,
   LinkFilesStyled,
   ButtonsFilesStyled,
+  TextLinkStyled,
 } from './list-files-styled'
-import { IcoImage } from 'components/ico-image'
 
-type fileListType = {
-  id: string
-  name: string
-  content: string
-  active: boolean
-  status: 'editing' | 'saving' | 'saved'
-}
+import { FileList, Status } from 'resources/files/types'
+import * as Icon from 'ui/icons'
+import { StatusIconStyled } from 'components/status-icon/status-icon-styled'
 
-const filesList: fileListType[] = [
+const filesList: FileList[] = [
   {
     id: '1',
     name: 'README.md',
@@ -68,13 +64,12 @@ function ListFiles() {
     </ListFilesStyled>
   )
 }
-
-type ItemFilesProps = {
+export type ItemFilesProps = {
   fileId: string
   fileLink: string
   fileName: string
   fileActive: boolean
-  fileStatus: string
+  fileStatus: Status
 }
 
 function ItemFiles({
@@ -84,21 +79,6 @@ function ItemFiles({
   fileActive,
   fileStatus,
 }: ItemFilesProps) {
-  function getIco(fileStatus: string) {
-    if (fileStatus === 'editing' && fileActive) {
-      return '●'
-    }
-    if (fileStatus === 'saving' && fileActive) {
-      return '⟳'
-    }
-    if (fileStatus === 'saved' && fileActive) {
-      return '✓'
-    }
-    if (!fileActive) {
-      return 'x'
-    }
-  }
-
   return (
     <ItemFilesStyled
       key={fileId}
@@ -110,23 +90,28 @@ function ItemFiles({
         fileName={fileName}
         fileActive={fileActive}
       />
-      <ButtonsFilesStyled>{getIco(fileStatus)}</ButtonsFilesStyled>
+      {fileActive && <StatusIconStyled status={fileStatus} />}
+
+      {!fileActive && (
+        <ButtonsFilesStyled title={`Remover o arquivo ${fileName}`}>
+          <Icon.FileRemove />
+        </ButtonsFilesStyled>
+      )}
     </ItemFilesStyled>
   )
 }
 
-type LinkFilesProps = {
+export type LinkFilesProps = {
   fileLink: string
   fileName: string
   fileActive: boolean
 }
+
 function LinkFiles({ fileLink, fileName, fileActive }: LinkFilesProps) {
   return (
     <LinkFilesStyled href={fileLink}>
-      <IcoImage
-        pathImage={fileActive ? 'ico-file-green.png' : 'ico-file.png'}
-      />
-      {fileName}
+      {!fileActive ? <Icon.File /> : <Icon.FileActive />}
+      <TextLinkStyled>{fileName}</TextLinkStyled>
     </LinkFilesStyled>
   )
 }

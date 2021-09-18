@@ -11,6 +11,7 @@ const ButtonAddFileStyle = styled.button`
   &:hover {
     ${({ theme }) => css`
       background: ${theme.colors.primaryHover};
+      transition: background, 0.5s;
     `}
   }
 

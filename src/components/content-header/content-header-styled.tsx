@@ -12,6 +12,7 @@ const InputFileStyled = styled.input`
   clip: rect(0 0 0 0);
   background-color: transparent;
   width: 300px;
+  border-bottom: 2px solid transparent;
 
   ${({ theme }) => css`
     font-family: ${theme.fonts.secondary};
