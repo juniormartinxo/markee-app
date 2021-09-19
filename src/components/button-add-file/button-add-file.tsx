@@ -1,6 +1,7 @@
 import ButtonAddFileStyle from './button-add-file-styled'
 import { File } from 'resources/files/types'
 import { v4 as uuidv4 } from 'uuid'
+import * as ActionsFile from 'common/Files'
 
 type ButtonAddFileProps = {
   setFiles: Function
@@ -24,7 +25,11 @@ function ButtonAddFile({ setFiles, files }: ButtonAddFileProps) {
       return file
     })
 
-    setFiles([fileItem, ...filesNew])
+    const newFiles = [...filesNew, fileItem]
+
+    setFiles(newFiles)
+
+    ActionsFile.setFileList(newFiles)
   }
   return (
     <ButtonAddFileStyle onClick={addFile}>

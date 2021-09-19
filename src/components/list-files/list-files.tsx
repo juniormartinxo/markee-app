@@ -6,7 +6,7 @@ import {
   TextLinkStyled,
 } from './list-files-styled'
 
-import * as LOCAL_FILES from 'common/Files'
+import * as ActionsFile from 'common/Files'
 
 import { File, Status } from 'resources/files/types'
 import * as Icon from 'ui/icons'
@@ -69,7 +69,7 @@ function ItemFiles({
           title={`Remover o arquivo ${fileName}`}
           onClick={(e) => {
             e.preventDefault()
-            LOCAL_FILES.setFileList(files)
+            ActionsFile.removeFile(fileId, files)
           }}
         >
           <Icon.FileRemove />
