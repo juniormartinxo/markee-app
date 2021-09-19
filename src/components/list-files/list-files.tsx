@@ -6,7 +6,7 @@ import {
   TextLinkStyled,
 } from './list-files-styled'
 
-import * as ActionsFile from 'common/Files'
+import * as FileActions from 'common/file-actions'
 
 import { File, Status } from 'resources/files/types'
 import * as Icon from 'ui/icons'
@@ -14,9 +14,10 @@ import { StatusIconStyled } from 'components/status-icon/status-icon-styled'
 
 type ListFilesProps = {
   files: File[]
+  setFiles: Function
 }
 
-function ListFiles({ files }: ListFilesProps) {
+function ListFiles({ files, setFiles }: ListFilesProps) {
   return (
     <ListFilesStyled>
       {files.map((file) => (
@@ -28,6 +29,7 @@ function ListFiles({ files }: ListFilesProps) {
           fileActive={file.active}
           fileStatus={file.status}
           files={files}
+          setFiles={setFiles}
         />
       ))}
     </ListFilesStyled>
@@ -41,6 +43,7 @@ export type ItemFilesProps = {
   fileActive: boolean
   fileStatus: Status
   files: File[]
+  setFiles: Function
 }
 
 function ItemFiles({
@@ -50,7 +53,16 @@ function ItemFiles({
   fileActive,
   fileStatus,
   files,
+  setFiles,
 }: ItemFilesProps) {
+  const removeFile = (fileId: string) => {
+    const filesNew = files.filter((file) => file.id !== fileId)
+
+    setFiles(filesNew)
+
+    FileActions.setFileList(filesNew)
+  }
+
   return (
     <ItemFilesStyled
       key={fileId}
@@ -69,7 +81,7 @@ function ItemFiles({
           title={`Remover o arquivo ${fileName}`}
           onClick={(e) => {
             e.preventDefault()
-            ActionsFile.removeFile(fileId, files)
+            removeFile(fileId)
           }}
         >
           <Icon.FileRemove />
