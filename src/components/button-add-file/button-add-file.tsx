@@ -19,7 +19,6 @@ function ButtonAddFile({ setFiles, files }: ButtonAddFileProps) {
 
     const filesNew = files.map((file) => {
       file.active = false
-      file.status = 'saved'
       return file
     })
 
