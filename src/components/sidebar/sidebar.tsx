@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, RefObject } from 'react'
 import { Logo } from 'components/logo'
 import SidebarStyled from './sidebar-styled'
 import { TitleLinethrough } from 'components/title-linethrough'
@@ -8,7 +8,11 @@ import { ListFiles } from 'components/list-files'
 import { File } from 'resources/files/types'
 import * as FileActions from 'common/file-actions'
 
-function Sidebar() {
+type SidebarProps = {
+  refInputFileName: RefObject<HTMLInputElement>
+}
+
+function Sidebar({ refInputFileName }: SidebarProps) {
   const [files, setFiles] = useState<File[]>(
     JSON.parse(FileActions.getFileList() ?? '[]'),
   )
@@ -18,7 +22,11 @@ function Sidebar() {
       <Logo />
       <TitleLinethrough>Arquivos</TitleLinethrough>
       <ContainerButtonsSidebar>
-        <ButtonAddFile setFiles={setFiles} files={files} />
+        <ButtonAddFile
+          setFiles={setFiles}
+          files={files}
+          refInputFileName={refInputFileName}
+        />
       </ContainerButtonsSidebar>
       <ListFiles files={files} setFiles={setFiles} />
     </SidebarStyled>
