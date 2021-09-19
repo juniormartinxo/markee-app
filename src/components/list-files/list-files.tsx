@@ -2,7 +2,7 @@ import {
   ListFilesStyled,
   ItemFilesStyled,
   LinkFilesStyled,
-  ButtonsFilesStyled,
+  ButtonFileStyled,
   TextLinkStyled,
 } from './list-files-styled'
 
@@ -60,9 +60,9 @@ function ItemFiles({
       {fileActive && <StatusIconStyled status={fileStatus} />}
 
       {!fileActive && (
-        <ButtonsFilesStyled title={`Remover o arquivo ${fileName}`}>
+        <ButtonFileStyled title={`Remover o arquivo ${fileName}`}>
           <Icon.FileRemove />
-        </ButtonsFilesStyled>
+        </ButtonFileStyled>
       )}
     </ItemFilesStyled>
   )

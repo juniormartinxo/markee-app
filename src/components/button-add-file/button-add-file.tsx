@@ -9,10 +9,12 @@ type ButtonAddFileProps = {
 
 function ButtonAddFile({ setFiles, files }: ButtonAddFileProps) {
   const addFile = () => {
+    const fileId = uuidv4()
+
     const fileItem = {
-      id: uuidv4(),
+      id: fileId,
       name: 'Sem título',
-      content: '',
+      content: `/file/${fileId}`,
       active: true,
       status: 'saved',
     }
