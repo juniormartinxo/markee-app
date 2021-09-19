@@ -1,6 +1,6 @@
 export type Status = 'editing' | 'saving' | 'saved'
 
-export type FileList = {
+export type File = {
   id: string
   name: string
   content: string
