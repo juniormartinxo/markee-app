@@ -4,12 +4,6 @@ import { Viewer } from 'components/viewer'
 import { ContentHeader } from 'components/content-header'
 import { ContentEditor } from 'components/content-editor'
 
-/*
-type ContentProps = {
-  children: ReactNode | ReactNode[]
-}
-*/
-
 function Content() {
   return (
     <ContentStyled>

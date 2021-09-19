@@ -5,7 +5,7 @@ function ContentHeader() {
   return (
     <ContentHeaderStyled>
       <IcoImage pathImage="ico-file-green.png" />
-      <InputFileStyled value="CONTRIBUT" />
+      <InputFileStyled defaultValue="CONTRIBUT" />
     </ContentHeaderStyled>
   )
 }
