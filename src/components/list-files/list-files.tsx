@@ -6,6 +6,8 @@ import {
   TextLinkStyled,
 } from './list-files-styled'
 
+import * as LOCAL_FILES from 'common/Files'
+
 import { File, Status } from 'resources/files/types'
 import * as Icon from 'ui/icons'
 import { StatusIconStyled } from 'components/status-icon/status-icon-styled'
@@ -25,6 +27,7 @@ function ListFiles({ files }: ListFilesProps) {
           fileName={file.name}
           fileActive={file.active}
           fileStatus={file.status}
+          files={files}
         />
       ))}
     </ListFilesStyled>
@@ -37,6 +40,7 @@ export type ItemFilesProps = {
   fileName: string
   fileActive: boolean
   fileStatus: Status
+  files: File[]
 }
 
 function ItemFiles({
@@ -45,6 +49,7 @@ function ItemFiles({
   fileName,
   fileActive,
   fileStatus,
+  files,
 }: ItemFilesProps) {
   return (
     <ItemFilesStyled
@@ -60,7 +65,13 @@ function ItemFiles({
       {fileActive && <StatusIconStyled status={fileStatus} />}
 
       {!fileActive && (
-        <ButtonFileStyled title={`Remover o arquivo ${fileName}`}>
+        <ButtonFileStyled
+          title={`Remover o arquivo ${fileName}`}
+          onClick={(e) => {
+            e.preventDefault()
+            LOCAL_FILES.setFileList(files)
+          }}
+        >
           <Icon.FileRemove />
         </ButtonFileStyled>
       )}
