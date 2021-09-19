@@ -23,7 +23,7 @@ function ButtonAddFile({ setFiles, files }: ButtonAddFileProps) {
       return file
     })
 
-    setFiles([...filesNew, fileItem])
+    setFiles([fileItem, ...filesNew])
   }
   return (
     <ButtonAddFileStyle onClick={addFile}>
