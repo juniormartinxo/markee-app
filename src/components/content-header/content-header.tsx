@@ -5,7 +5,7 @@ function ContentHeader() {
   return (
     <ContentHeaderStyled>
       <Icon.FileActive />
-      <InputFileStyled value="CONTRIBUT" />
+      <InputFileStyled defaultValue="CONTRIBUT" />
     </ContentHeaderStyled>
   )
 }
