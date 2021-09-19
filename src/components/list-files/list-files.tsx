@@ -6,52 +6,18 @@ import {
   TextLinkStyled,
 } from './list-files-styled'
 
-import { FileList, Status } from 'resources/files/types'
+import { File, Status } from 'resources/files/types'
 import * as Icon from 'ui/icons'
 import { StatusIconStyled } from 'components/status-icon/status-icon-styled'
 
-const filesList: FileList[] = [
-  {
-    id: '1',
-    name: 'README.md',
-    content: '/',
-    active: false,
-    status: 'saved',
-  },
-  {
-    id: '2',
-    name: 'CONTRIBUTING.md',
-    content: '/',
-    active: true,
-    status: 'editing',
-  },
-  {
-    id: '3',
-    name: 'LICENSE.md',
-    content: '/',
-    active: false,
-    status: 'saved',
-  },
-  {
-    id: '4',
-    name: 'Links.md',
-    content: '/',
-    active: false,
-    status: 'saved',
-  },
-  {
-    id: '5',
-    name: 'roadmap.md',
-    content: '/',
-    active: false,
-    status: 'saved',
-  },
-]
+type ListFilesProps = {
+  files: File[]
+}
 
-function ListFiles() {
+function ListFiles({ files }: ListFilesProps) {
   return (
     <ListFilesStyled>
-      {filesList.map((file) => (
+      {files.map((file) => (
         <ItemFiles
           key={file.id}
           fileId={file.id}
@@ -64,6 +30,7 @@ function ListFiles() {
     </ListFilesStyled>
   )
 }
+
 export type ItemFilesProps = {
   fileId: string
   fileLink: string
