@@ -9,9 +9,17 @@ const ViewerStyled = styled.div`
     font-family: ${theme.fonts.secondary};
   `};
 
-  * {
+  *::first-child {
     box-sizing: border-box;
     padding: 0;
+    margin: 0;
+  }
+
+  pre {
+    padding: 15px;
+    background: #f3f3f387;
+    border-radius: 2px;
+    border: 1px solid #e7e7e7;
     margin: 0;
   }
 `
