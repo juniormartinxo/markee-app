@@ -17,7 +17,13 @@ function ButtonAddFile({ setFiles, files }: ButtonAddFileProps) {
       status: 'saved',
     }
 
-    setFiles([...files, fileItem])
+    const filesNew = files.map((file) => {
+      file.active = false
+      file.status = 'saved'
+      return file
+    })
+
+    setFiles([...filesNew, fileItem])
   }
   return (
     <ButtonAddFileStyle onClick={addFile}>
