@@ -7,46 +7,8 @@ import { ContainerButtonsSidebar } from 'components/container-buttons-sidebar'
 import { ListFiles } from 'components/list-files'
 import { File } from 'resources/files/types'
 
-const fileList: File[] = [
-  {
-    id: '1',
-    name: 'README.md',
-    content: '/',
-    active: false,
-    status: 'saved',
-  },
-  {
-    id: '2',
-    name: 'CONTRIBUTING.md',
-    content: '/',
-    active: true,
-    status: 'editing',
-  },
-  {
-    id: '3',
-    name: 'LICENSE.md',
-    content: '/',
-    active: false,
-    status: 'saved',
-  },
-  {
-    id: '4',
-    name: 'Links.md',
-    content: '/',
-    active: false,
-    status: 'saved',
-  },
-  {
-    id: '5',
-    name: 'roadmap.md',
-    content: '/',
-    active: false,
-    status: 'saved',
-  },
-]
-
 function Sidebar() {
-  const [files, setFiles] = useState(fileList)
+  const [files, setFiles] = useState<File[]>([])
   return (
     <SidebarStyled>
       <Logo />
