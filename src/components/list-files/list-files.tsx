@@ -1,3 +1,4 @@
+import { RefObject } from 'react'
 import {
   ListFilesStyled,
   ItemFilesStyled,
@@ -16,9 +17,15 @@ type ListFilesProps = {
   files: File[]
   setFiles: Function
   setCurrentFileId: Function
+  refInputFileName: RefObject<HTMLInputElement>
 }
 
-function ListFiles({ files, setFiles, setCurrentFileId }: ListFilesProps) {
+function ListFiles({
+  files,
+  setFiles,
+  setCurrentFileId,
+  refInputFileName,
+}: ListFilesProps) {
   return (
     <ListFilesStyled>
       {files.map((file) => (
@@ -32,6 +39,7 @@ function ListFiles({ files, setFiles, setCurrentFileId }: ListFilesProps) {
           files={files}
           setFiles={setFiles}
           setCurrentFileId={setCurrentFileId}
+          refInputFileName={refInputFileName}
         />
       ))}
     </ListFilesStyled>
@@ -47,6 +55,7 @@ export type ItemFilesProps = {
   files: File[]
   setFiles: Function
   setCurrentFileId: Function
+  refInputFileName: RefObject<HTMLInputElement>
 }
 
 function ItemFiles({
@@ -58,6 +67,7 @@ function ItemFiles({
   files,
   setFiles,
   setCurrentFileId,
+  refInputFileName,
 }: ItemFilesProps) {
   const removeFile = (fileId: string) => {
     const filesNew = files.filter((file) => file.id !== fileId)
@@ -78,7 +88,10 @@ function ItemFiles({
         fileLink={fileLink}
         fileName={fileName}
         fileActive={fileActive}
+        files={files}
         setCurrentFileId={setCurrentFileId}
+        setFiles={setFiles}
+        refInputFileName={refInputFileName}
       />
       {fileActive && <StatusIconStyled status={fileStatus} />}
 
@@ -102,7 +115,10 @@ export type LinkFilesProps = {
   fileLink: string
   fileName: string
   fileActive: boolean
+  files: File[]
   setCurrentFileId: Function
+  setFiles: Function
+  refInputFileName: RefObject<HTMLInputElement>
 }
 
 function LinkFiles({
@@ -110,14 +126,36 @@ function LinkFiles({
   fileLink,
   fileName,
   fileActive,
+  files,
   setCurrentFileId,
+  setFiles,
+  refInputFileName,
 }: LinkFilesProps) {
+  const handleClick = () => {
+    const filesNew = files.map((file) => {
+      file.active = file.id === fileId
+      file.status = file.id === fileId ? 'editing' : 'saved'
+
+      return file
+    })
+
+    setFiles(filesNew)
+
+    FileActions.setFileList(filesNew)
+
+    if (refInputFileName.current) {
+      refInputFileName.current.value = fileName
+      refInputFileName.current.focus()
+    }
+  }
+
   return (
     <LinkFilesStyled
       href={fileLink}
       onClick={(e) => {
         e.preventDefault()
         setCurrentFileId(fileId)
+        handleClick()
       }}
     >
       {!fileActive ? <Icon.File /> : <Icon.FileActive />}

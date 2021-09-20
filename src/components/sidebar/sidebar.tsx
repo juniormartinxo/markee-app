@@ -35,6 +35,7 @@ function Sidebar({
         files={files}
         setFiles={setFiles}
         setCurrentFileId={setCurrentFileId}
+        refInputFileName={refInputFileName}
       />
     </SidebarStyled>
   )

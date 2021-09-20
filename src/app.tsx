@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Content } from 'components/content'
 import Main from 'components/main/main'
 import { Sidebar } from 'components/sidebar'
@@ -11,6 +11,15 @@ function App() {
     JSON.parse(FileActions.getFileList() ?? '[]'),
   )
   const refInputFileName = useRef<HTMLInputElement | null>(null)
+
+  useEffect(() => {
+    const timerEditing = setTimeout(() => {
+      refInputFileName.current?.blur()
+    }, 3000)
+    return () => {
+      clearTimeout(timerEditing)
+    }
+  }, [files])
 
   return (
     <Main>
