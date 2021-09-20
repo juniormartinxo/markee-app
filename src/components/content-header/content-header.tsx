@@ -1,4 +1,4 @@
-import { RefObject } from 'react'
+import { useEffect, useState, RefObject } from 'react'
 import { ContentHeaderStyled, InputFileStyled } from './content-header-styled'
 import * as Icon from 'ui/icons'
 import * as FileActions from 'common/file-actions'
@@ -17,7 +17,9 @@ function ContentHeader({
   files,
   setFiles,
 }: ContentHeaderProps) {
-  const handleKeyDown = () => {
+  const [timerKey, setTimerKey] = useState(3000)
+
+  const handleKeyUp = () => {
     const filesNew = files.map((file) => {
       file.active = file.id === currentFileId
       file.status = file.id === currentFileId ? 'saving' : 'saved'
@@ -28,9 +30,17 @@ function ContentHeader({
     setFiles(filesNew)
 
     FileActions.setFileList(filesNew)
+
+    setTimerKey(3000)
+
+    if (timerKey <= 0) {
+      setTimeout(() => {
+        refInputFileName.current?.blur()
+      }, timerKey)
+    }
   }
 
-  const handleKeyUp = () => {
+  const handleSave = () => {
     const filesNew = files.map((file) => {
       file.active = file.id === currentFileId
       file.status = file.id === currentFileId ? 'editing' : 'saved'
@@ -45,6 +55,8 @@ function ContentHeader({
     setFiles(filesNew)
 
     FileActions.setFileList(filesNew)
+
+    setTimerKey(0)
   }
 
   return (
@@ -52,13 +64,13 @@ function ContentHeader({
       <Icon.FileActive />
       <InputFileStyled
         ref={refInputFileName}
-        onKeyDown={handleKeyDown}
+        onKeyUp={handleKeyUp}
         onKeyPress={(e) => {
           if (e.key === 'Enter') {
-            handleKeyUp()
+            handleSave()
           }
         }}
-        onBlur={handleKeyUp}
+        onBlur={handleSave}
       />
     </ContentHeaderStyled>
   )
