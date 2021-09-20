@@ -15,9 +15,10 @@ import { StatusIconStyled } from 'components/status-icon/status-icon-styled'
 type ListFilesProps = {
   files: File[]
   setFiles: Function
+  setCurrentFileId: Function
 }
 
-function ListFiles({ files, setFiles }: ListFilesProps) {
+function ListFiles({ files, setFiles, setCurrentFileId }: ListFilesProps) {
   return (
     <ListFilesStyled>
       {files.map((file) => (
@@ -30,6 +31,7 @@ function ListFiles({ files, setFiles }: ListFilesProps) {
           fileStatus={file.status}
           files={files}
           setFiles={setFiles}
+          setCurrentFileId={setCurrentFileId}
         />
       ))}
     </ListFilesStyled>
@@ -44,6 +46,7 @@ export type ItemFilesProps = {
   fileStatus: Status
   files: File[]
   setFiles: Function
+  setCurrentFileId: Function
 }
 
 function ItemFiles({
@@ -54,6 +57,7 @@ function ItemFiles({
   fileStatus,
   files,
   setFiles,
+  setCurrentFileId,
 }: ItemFilesProps) {
   const removeFile = (fileId: string) => {
     const filesNew = files.filter((file) => file.id !== fileId)
@@ -70,9 +74,11 @@ function ItemFiles({
       fileActive={fileActive}
     >
       <LinkFiles
+        fileId={fileId}
         fileLink={fileLink}
         fileName={fileName}
         fileActive={fileActive}
+        setCurrentFileId={setCurrentFileId}
       />
       {fileActive && <StatusIconStyled status={fileStatus} />}
 
@@ -92,14 +98,28 @@ function ItemFiles({
 }
 
 export type LinkFilesProps = {
+  fileId: string
   fileLink: string
   fileName: string
   fileActive: boolean
+  setCurrentFileId: Function
 }
 
-function LinkFiles({ fileLink, fileName, fileActive }: LinkFilesProps) {
+function LinkFiles({
+  fileId,
+  fileLink,
+  fileName,
+  fileActive,
+  setCurrentFileId,
+}: LinkFilesProps) {
   return (
-    <LinkFilesStyled href={fileLink}>
+    <LinkFilesStyled
+      href={fileLink}
+      onClick={(e) => {
+        e.preventDefault()
+        setCurrentFileId(fileId)
+      }}
+    >
       {!fileActive ? <Icon.File /> : <Icon.FileActive />}
       <TextLinkStyled>{fileName}</TextLinkStyled>
     </LinkFilesStyled>

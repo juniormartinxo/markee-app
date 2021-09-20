@@ -19,15 +19,13 @@ function ButtonAddFile({
     const fileId = uuidv4()
 
     refInputFileName.current?.focus()
-    console.log(refInputFileName.current?.value)
-    // refInputFileName.current?.value += 'tes'
 
     const fileItem = {
       id: fileId,
       name: 'Sem título',
       content: `/file/${fileId}`,
       active: true,
-      status: 'editing',
+      status: 'saved',
     }
 
     const filesNew = files.map((file) => {
