@@ -69,68 +69,6 @@ function ItemFiles({
   setCurrentFileId,
   refInputFileName,
 }: ItemFilesProps) {
-  const removeFile = (fileId: string) => {
-    const filesNew = files.filter((file) => file.id !== fileId)
-
-    setFiles(filesNew)
-
-    FileActions.setFileList(filesNew)
-  }
-
-  return (
-    <ItemFilesStyled
-      key={fileId}
-      fileStatus={fileStatus}
-      fileActive={fileActive}
-    >
-      <LinkFiles
-        fileId={fileId}
-        fileLink={fileLink}
-        fileName={fileName}
-        fileActive={fileActive}
-        files={files}
-        setCurrentFileId={setCurrentFileId}
-        setFiles={setFiles}
-        refInputFileName={refInputFileName}
-      />
-      {fileActive && <StatusIconStyled status={fileStatus} />}
-
-      {!fileActive && (
-        <ButtonFileStyled
-          title={`Remover o arquivo ${fileName}`}
-          onClick={(e) => {
-            e.preventDefault()
-            removeFile(fileId)
-          }}
-        >
-          <Icon.FileRemove />
-        </ButtonFileStyled>
-      )}
-    </ItemFilesStyled>
-  )
-}
-
-export type LinkFilesProps = {
-  fileId: string
-  fileLink: string
-  fileName: string
-  fileActive: boolean
-  files: File[]
-  setCurrentFileId: Function
-  setFiles: Function
-  refInputFileName: RefObject<HTMLInputElement>
-}
-
-function LinkFiles({
-  fileId,
-  fileLink,
-  fileName,
-  fileActive,
-  files,
-  setCurrentFileId,
-  setFiles,
-  refInputFileName,
-}: LinkFilesProps) {
   const handleClick = () => {
     const filesNew = files.map((file) => {
       file.active = file.id === fileId
@@ -148,19 +86,45 @@ function LinkFiles({
       refInputFileName.current.focus()
     }
   }
+  const removeFile = (fileId: string) => {
+    const filesNew = files.filter((file) => file.id !== fileId)
+
+    setFiles(filesNew)
+
+    FileActions.setFileList(filesNew)
+  }
 
   return (
-    <LinkFilesStyled
-      href={fileLink}
-      onClick={(e) => {
-        e.preventDefault()
-        setCurrentFileId(fileId)
-        handleClick()
-      }}
+    <ItemFilesStyled
+      key={fileId}
+      fileStatus={fileStatus}
+      fileActive={fileActive}
     >
-      {!fileActive ? <Icon.File /> : <Icon.FileActive />}
-      <TextLinkStyled>{fileName}</TextLinkStyled>
-    </LinkFilesStyled>
+      <LinkFilesStyled
+        href={`/file/${fileId}`}
+        onClick={(e) => {
+          e.preventDefault()
+          setCurrentFileId(fileId)
+          handleClick()
+        }}
+      >
+        {!fileActive ? <Icon.File /> : <Icon.FileActive />}
+        <TextLinkStyled>{fileName}</TextLinkStyled>
+      </LinkFilesStyled>
+      {fileActive && <StatusIconStyled status={fileStatus} />}
+
+      {!fileActive && (
+        <ButtonFileStyled
+          title={`Remover o arquivo ${fileName}`}
+          onClick={(e) => {
+            e.preventDefault()
+            removeFile(fileId)
+          }}
+        >
+          <Icon.FileRemove />
+        </ButtonFileStyled>
+      )}
+    </ItemFilesStyled>
   )
 }
 

@@ -30,7 +30,13 @@ function Content({
         currentFileId={currentFileId}
       />
       <ContentEditor>
-        <Editor setMkdText={setMkdText} />
+        <Editor
+          setMkdText={setMkdText}
+          currentFileId={currentFileId}
+          files={files}
+          setFiles={setFiles}
+          refInputFileName={refInputFileName}
+        />
         <Viewer mkdText={mkdText} />
       </ContentEditor>
     </ContentStyled>
