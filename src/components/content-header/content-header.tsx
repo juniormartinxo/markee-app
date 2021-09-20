@@ -34,6 +34,10 @@ function ContentHeader({
     const filesNew = files.map((file) => {
       file.active = file.id === currentFileId
       file.status = file.id === currentFileId ? 'editing' : 'saved'
+      file.name =
+        file.id === currentFileId
+          ? refInputFileName.current?.value ?? file.name
+          : file.name
 
       return file
     })
