@@ -1,4 +1,4 @@
-import { useEffect, useState, RefObject } from 'react'
+import { useState, RefObject } from 'react'
 import { ContentHeaderStyled, InputFileStyled } from './content-header-styled'
 import * as Icon from 'ui/icons'
 import * as FileActions from 'common/file-actions'
