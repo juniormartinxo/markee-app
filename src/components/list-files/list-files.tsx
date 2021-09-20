@@ -6,12 +6,10 @@ import {
   ButtonFileStyled,
   TextLinkStyled,
 } from './list-files-styled'
-
-import * as FileActions from 'common/file-actions'
-
 import { File, Status } from 'resources/files/types'
-import * as Icon from 'ui/icons'
 import { StatusIconStyled } from 'components/status-icon/status-icon-styled'
+import * as FileActions from 'common/file-actions'
+import * as Icon from 'ui/icons'
 
 type ListFilesProps = {
   files: File[]

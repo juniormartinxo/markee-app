@@ -1,8 +1,8 @@
-import { useEffect, useState, RefObject } from 'react'
+import { RefObject } from 'react'
 import { ContentHeaderStyled, InputFileStyled } from './content-header-styled'
-import * as Icon from 'ui/icons'
-import * as FileActions from 'common/file-actions'
 import { File } from 'resources/files/types'
+import * as FileActions from 'common/file-actions'
+import * as Icon from 'ui/icons'
 
 type ContentHeaderProps = {
   refInputFileName: RefObject<HTMLInputElement>
@@ -17,8 +17,6 @@ function ContentHeader({
   files,
   setFiles,
 }: ContentHeaderProps) {
-  const [timerKey, setTimerKey] = useState(3000)
-
   const handleKeyUp = () => {
     const filesNew = files.map((file) => {
       file.active = file.id === currentFileId
@@ -28,16 +26,7 @@ function ContentHeader({
     })
 
     setFiles(filesNew)
-
     FileActions.setFileList(filesNew)
-
-    setTimerKey(3000)
-
-    if (timerKey <= 0) {
-      setTimeout(() => {
-        refInputFileName.current?.blur()
-      }, timerKey)
-    }
   }
 
   const handleSave = () => {
@@ -53,10 +42,7 @@ function ContentHeader({
     })
 
     setFiles(filesNew)
-
     FileActions.setFileList(filesNew)
-
-    setTimerKey(0)
   }
 
   return (
