@@ -20,7 +20,7 @@ function Editor({
 }: EditorProps) {
   const [timer, setTimer] = useState(setTimeout(() => {}, 300))
 
-  const handleKeyUp = () => {
+  const handleEditFile = () => {
     const filesNew = files.map((file) => {
       file.active = file.id === currentFileId
       file.status = file.id === currentFileId ? 'saving' : 'saved'
@@ -80,7 +80,7 @@ function Editor({
         ref={refEditorTextArea}
         onChange={(e) => {
           clearTimeout(timer)
-          setTimer(setTimeout(handleKeyUp, 300))
+          setTimer(setTimeout(handleEditFile, 300))
           handleChange(e)
         }}
         onBlur={handleSave}

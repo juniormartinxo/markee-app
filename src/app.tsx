@@ -8,7 +8,7 @@ import * as FileActions from 'common/file-actions'
 function App() {
   const [currentFileId, setCurrentFileId] = useState('')
   const [mkdText, setMkdText] = useState('')
-  const [files, setFiles] = useState<File[]>(FileActions.getFileList() ?? '[]')
+  const [files, setFiles] = useState<File[]>(FileActions.getFileList())
   const refInputFileName = useRef<HTMLInputElement | null>(null)
   const refEditorTextArea = useRef<HTMLTextAreaElement | null>(null)
 

@@ -32,14 +32,12 @@ export function getFileList() {
   if (storage !== null) {
     const files = JSON.parse(storage)
 
-    const filesNew = files.map((file: FileStorage) => {
+    return files.map((file: FileStorage) => {
       file.active = false
       file.status = 'saved'
 
       return file
     })
-
-    return filesNew
   } else {
     return '[]'
   }

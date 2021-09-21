@@ -19,7 +19,7 @@ function ContentHeader({
 }: ContentHeaderProps) {
   const [timer, setTimer] = useState(setTimeout(() => {}, 300))
 
-  const handleKeyUp = () => {
+  const handleEditFile = () => {
     const filesNew = files.map((file) => {
       file.active = file.id === currentFileId
       file.status = file.id === currentFileId ? 'saving' : 'saved'
@@ -75,7 +75,7 @@ function ContentHeader({
         ref={refInputFileName}
         onChange={() => {
           clearTimeout(timer)
-          setTimer(setTimeout(handleKeyUp, 300))
+          setTimer(setTimeout(handleEditFile, 300))
           handleChange()
         }}
         onBlur={handleSave}
