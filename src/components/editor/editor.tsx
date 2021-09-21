@@ -1,26 +1,26 @@
-import { RefObject, ChangeEvent } from 'react'
+import { useState, RefObject, ChangeEvent } from 'react'
 import { EditorStyled, TextEditorStyled } from './editor-styled'
 import { File } from 'resources/files/types'
 import * as FileActions from 'common/file-actions'
 
 type EditorProps = {
-  setMkdText: Function
-  currentFileId: string
   files: File[]
+  currentFileId: string
   setFiles: Function
-  refInputFileName: RefObject<HTMLInputElement>
+  setMkdText: Function
+  refEditorTextArea: RefObject<HTMLTextAreaElement>
 }
 
 function Editor({
-  setMkdText,
-  currentFileId,
   files,
+  currentFileId,
   setFiles,
-  refInputFileName,
+  setMkdText,
+  refEditorTextArea,
 }: EditorProps) {
-  const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    setMkdText(e.target.value)
+  const [timer, setTimer] = useState(setTimeout(() => {}, 300))
 
+  const handleKeyUp = () => {
     const filesNew = files.map((file) => {
       file.active = file.id === currentFileId
       file.status = file.id === currentFileId ? 'saving' : 'saved'
@@ -32,19 +32,36 @@ function Editor({
 
     FileActions.setFileList(filesNew)
 
-    setTimeout(() => {
-      handleSave()
-    }, 300)
+    setTimeout(handleSave, 300)
   }
 
   const handleSave = () => {
     const filesNew = files.map((file) => {
       file.active = file.id === currentFileId
-      file.status = file.id === currentFileId ? 'editing' : 'saved'
-      file.name =
+      file.status = file.id === currentFileId ? 'saved' : 'saved'
+      file.content =
         file.id === currentFileId
-          ? refInputFileName.current?.value ?? file.name
-          : file.name
+          ? refEditorTextArea.current?.value ?? file.content
+          : file.content
+
+      return file
+    })
+
+    setFiles(filesNew)
+
+    FileActions.setFileList(filesNew)
+  }
+
+  const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    setMkdText(e.target.value)
+
+    const filesNew = files.map((file) => {
+      file.active = file.id === currentFileId
+      file.status = file.id === currentFileId ? 'editing' : 'saved'
+      file.content =
+        file.id === currentFileId
+          ? refEditorTextArea.current?.value ?? file.content
+          : file.content
 
       return file
     })
@@ -60,7 +77,13 @@ function Editor({
         name=""
         id=""
         placeholder="Digite aqui o seu markdown"
-        onChange={handleChange}
+        ref={refEditorTextArea}
+        onChange={(e) => {
+          clearTimeout(timer)
+          setTimer(setTimeout(handleKeyUp, 300))
+          handleChange(e)
+        }}
+        onBlur={handleSave}
       />
     </EditorStyled>
   )

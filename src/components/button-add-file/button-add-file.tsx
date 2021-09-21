@@ -23,7 +23,7 @@ function ButtonAddFile({
     const fileItem = {
       id: fileId,
       name: 'Sem título',
-      content: `/file/${fileId}`,
+      content: '',
       active: true,
       status: 'saved',
     }

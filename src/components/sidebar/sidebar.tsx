@@ -9,6 +9,7 @@ import { File } from 'resources/files/types'
 
 type SidebarProps = {
   refInputFileName: RefObject<HTMLInputElement>
+  refEditorTextArea: RefObject<HTMLTextAreaElement>
   files: File[]
   setFiles: Function
   setCurrentFileId: Function
@@ -16,6 +17,7 @@ type SidebarProps = {
 
 function Sidebar({
   refInputFileName,
+  refEditorTextArea,
   files,
   setFiles,
   setCurrentFileId,
@@ -36,6 +38,7 @@ function Sidebar({
         setFiles={setFiles}
         setCurrentFileId={setCurrentFileId}
         refInputFileName={refInputFileName}
+        refEditorTextArea={refEditorTextArea}
       />
     </SidebarStyled>
   )

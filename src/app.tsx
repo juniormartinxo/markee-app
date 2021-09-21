@@ -11,17 +11,20 @@ function App() {
     JSON.parse(FileActions.getFileList() ?? '[]'),
   )
   const refInputFileName = useRef<HTMLInputElement | null>(null)
+  const refEditorTextArea = useRef<HTMLTextAreaElement | null>(null)
 
   return (
     <Main>
       <Sidebar
         refInputFileName={refInputFileName}
+        refEditorTextArea={refEditorTextArea}
         setCurrentFileId={setCurrentFileId}
         setFiles={setFiles}
         files={files}
       />
       <Content
         refInputFileName={refInputFileName}
+        refEditorTextArea={refEditorTextArea}
         currentFileId={currentFileId}
         setFiles={setFiles}
         files={files}

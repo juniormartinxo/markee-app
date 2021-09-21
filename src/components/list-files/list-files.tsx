@@ -18,6 +18,7 @@ type ListFilesProps = {
   setFiles: Function
   setCurrentFileId: Function
   refInputFileName: RefObject<HTMLInputElement>
+  refEditorTextArea: RefObject<HTMLTextAreaElement>
 }
 
 function ListFiles({
@@ -25,6 +26,7 @@ function ListFiles({
   setFiles,
   setCurrentFileId,
   refInputFileName,
+  refEditorTextArea,
 }: ListFilesProps) {
   return (
     <ListFilesStyled>
@@ -36,10 +38,12 @@ function ListFiles({
           fileName={file.name}
           fileActive={file.active}
           fileStatus={file.status}
+          fileContent={file.content}
           files={files}
           setFiles={setFiles}
           setCurrentFileId={setCurrentFileId}
           refInputFileName={refInputFileName}
+          refEditorTextArea={refEditorTextArea}
         />
       ))}
     </ListFilesStyled>
@@ -52,22 +56,25 @@ export type ItemFilesProps = {
   fileName: string
   fileActive: boolean
   fileStatus: Status
+  fileContent: string
   files: File[]
   setFiles: Function
   setCurrentFileId: Function
   refInputFileName: RefObject<HTMLInputElement>
+  refEditorTextArea: RefObject<HTMLTextAreaElement>
 }
 
 function ItemFiles({
   fileId,
-  fileLink,
   fileName,
   fileActive,
   fileStatus,
+  fileContent,
   files,
   setFiles,
   setCurrentFileId,
   refInputFileName,
+  refEditorTextArea,
 }: ItemFilesProps) {
   const handleClick = () => {
     const filesNew = files.map((file) => {
@@ -84,6 +91,10 @@ function ItemFiles({
     if (refInputFileName.current) {
       refInputFileName.current.value = fileName
       refInputFileName.current.focus()
+    }
+
+    if (refEditorTextArea.current) {
+      refEditorTextArea.current.value = fileContent
     }
   }
   const removeFile = (fileId: string) => {

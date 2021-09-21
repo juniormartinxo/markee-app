@@ -8,6 +8,7 @@ import { File } from 'resources/files/types'
 
 type ContentProps = {
   refInputFileName: RefObject<HTMLInputElement>
+  refEditorTextArea: RefObject<HTMLTextAreaElement>
   files: File[]
   setFiles: Function
   currentFileId: string
@@ -15,6 +16,7 @@ type ContentProps = {
 
 function Content({
   refInputFileName,
+  refEditorTextArea,
   files,
   setFiles,
   currentFileId,
@@ -35,7 +37,7 @@ function Content({
           currentFileId={currentFileId}
           files={files}
           setFiles={setFiles}
-          refInputFileName={refInputFileName}
+          refEditorTextArea={refEditorTextArea}
         />
         <Viewer mkdText={mkdText} />
       </ContentEditor>
