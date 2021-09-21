@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { RefObject } from 'react'
 import { Logo } from 'components/logo'
 import SidebarStyled from './sidebar-styled'
 import { TitleLinethrough } from 'components/title-linethrough'
@@ -7,16 +7,39 @@ import { ContainerButtonsSidebar } from 'components/container-buttons-sidebar'
 import { ListFiles } from 'components/list-files'
 import { File } from 'resources/files/types'
 
-function Sidebar() {
-  const [files, setFiles] = useState<File[]>([])
+type SidebarProps = {
+  refInputFileName: RefObject<HTMLInputElement>
+  refEditorTextArea: RefObject<HTMLTextAreaElement>
+  files: File[]
+  setFiles: Function
+  setCurrentFileId: Function
+}
+
+function Sidebar({
+  refInputFileName,
+  refEditorTextArea,
+  files,
+  setFiles,
+  setCurrentFileId,
+}: SidebarProps) {
   return (
     <SidebarStyled>
       <Logo />
       <TitleLinethrough>Arquivos</TitleLinethrough>
       <ContainerButtonsSidebar>
-        <ButtonAddFile setFiles={setFiles} files={files} />
+        <ButtonAddFile
+          setFiles={setFiles}
+          files={files}
+          refInputFileName={refInputFileName}
+        />
       </ContainerButtonsSidebar>
-      <ListFiles files={files} />
+      <ListFiles
+        files={files}
+        setFiles={setFiles}
+        setCurrentFileId={setCurrentFileId}
+        refInputFileName={refInputFileName}
+        refEditorTextArea={refEditorTextArea}
+      />
     </SidebarStyled>
   )
 }

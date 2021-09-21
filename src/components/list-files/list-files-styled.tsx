@@ -9,7 +9,7 @@ const ListFilesStyled = styled.ul`
   padding: 15px;
 `
 
-const ButtonsFilesStyled = styled.button`
+const ButtonFileStyled = styled.button`
   ${({ theme }) => css`
     align-self: center;
     background-color: transparent;
@@ -46,7 +46,7 @@ const ItemFilesStyled = styled.li<ItemFilesStyledProps>`
     transition: ${transitionEnd} linear background-color;
     margin-bottom: 1px;
 
-    ${ButtonsFilesStyled} {
+    ${ButtonFileStyled} {
       display: ${() => props.fileStatus === 'editing' && 'block'};
       color: ${() => props.fileActive === true && props.theme.colors.primary};
       transition: ${transitionEnd} linear color;
@@ -61,7 +61,7 @@ const ItemFilesStyled = styled.li<ItemFilesStyledProps>`
       background-color: ${props.theme.colors.lightBlack};
       transition: ${transitionStart} linear background-color;
 
-      ${ButtonsFilesStyled} {
+      ${ButtonFileStyled} {
         display: block;
       }
     }
@@ -98,6 +98,6 @@ export {
   ListFilesStyled,
   ItemFilesStyled,
   LinkFilesStyled,
-  ButtonsFilesStyled,
+  ButtonFileStyled,
   TextLinkStyled,
 }
