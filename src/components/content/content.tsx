@@ -1,4 +1,4 @@
-import { RefObject, useState } from 'react'
+import { RefObject } from 'react'
 import ContentStyled from './content-styled'
 import { Editor } from 'components/editor'
 import { Viewer } from 'components/viewer'
@@ -12,6 +12,8 @@ type ContentProps = {
   files: File[]
   setFiles: Function
   currentFileId: string
+  mkdText: string
+  setMkdText: Function
 }
 
 function Content({
@@ -20,9 +22,9 @@ function Content({
   files,
   setFiles,
   currentFileId,
+  mkdText,
+  setMkdText,
 }: ContentProps) {
-  const [mkdText, setMkdText] = useState('')
-
   if (files.length === 0) {
     return null
   }

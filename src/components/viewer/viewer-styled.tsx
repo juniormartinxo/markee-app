@@ -9,7 +9,7 @@ const ViewerStyled = styled.div`
     font-family: ${theme.fonts.secondary};
   `};
 
-  *::first-child {
+  *:first-child {
     box-sizing: border-box;
     padding: 0;
     margin: 0;

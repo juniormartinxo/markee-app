@@ -7,9 +7,8 @@ import * as FileActions from 'common/file-actions'
 
 function App() {
   const [currentFileId, setCurrentFileId] = useState('')
-  const [files, setFiles] = useState<File[]>(
-    JSON.parse(FileActions.getFileList() ?? '[]'),
-  )
+  const [mkdText, setMkdText] = useState('')
+  const [files, setFiles] = useState<File[]>(FileActions.getFileList() ?? '[]')
   const refInputFileName = useRef<HTMLInputElement | null>(null)
   const refEditorTextArea = useRef<HTMLTextAreaElement | null>(null)
 
@@ -19,6 +18,7 @@ function App() {
         refInputFileName={refInputFileName}
         refEditorTextArea={refEditorTextArea}
         setCurrentFileId={setCurrentFileId}
+        setMkdText={setMkdText}
         setFiles={setFiles}
         files={files}
       />
@@ -28,6 +28,8 @@ function App() {
         currentFileId={currentFileId}
         setFiles={setFiles}
         files={files}
+        mkdText={mkdText}
+        setMkdText={setMkdText}
       />
     </Main>
   )

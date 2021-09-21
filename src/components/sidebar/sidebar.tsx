@@ -14,6 +14,7 @@ type SidebarProps = {
   files: File[]
   setFiles: Function
   setCurrentFileId: Function
+  setMkdText: Function
 }
 
 function Sidebar({
@@ -22,6 +23,7 @@ function Sidebar({
   files,
   setFiles,
   setCurrentFileId,
+  setMkdText,
 }: SidebarProps) {
   const addFile = () => {
     const fileId = uuidv4()
@@ -34,11 +36,19 @@ function Sidebar({
       status: 'saved',
     }
 
+    setCurrentFileId(fileItem.id)
+
     if (refInputFileName.current) {
-      refInputFileName.current.value = 'Sem título'
+      refInputFileName.current.value = fileItem.name
+
+      refInputFileName.current.focus()
     }
 
-    refInputFileName.current?.focus()
+    if (refEditorTextArea.current) {
+      refEditorTextArea.current.value = fileItem.content
+
+      setMkdText(fileItem.content)
+    }
 
     const filesNew = files.map((file) => {
       file.active = false
@@ -66,6 +76,7 @@ function Sidebar({
         setCurrentFileId={setCurrentFileId}
         refInputFileName={refInputFileName}
         refEditorTextArea={refEditorTextArea}
+        setMkdText={setMkdText}
       />
     </SidebarStyled>
   )
