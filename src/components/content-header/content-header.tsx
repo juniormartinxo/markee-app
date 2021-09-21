@@ -73,12 +73,13 @@ function ContentHeader({
       <Icon.FileActive />
       <InputFileStyled
         ref={refInputFileName}
-        onKeyUp={() => {
+        onChange={() => {
           clearTimeout(timer)
           setTimer(setTimeout(handleKeyUp, 300))
           handleChange()
         }}
         onBlur={handleSave}
+        autoFocus
       />
     </ContentHeaderStyled>
   )

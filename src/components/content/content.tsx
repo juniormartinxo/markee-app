@@ -23,6 +23,10 @@ function Content({
 }: ContentProps) {
   const [mkdText, setMkdText] = useState('')
 
+  if (files.length === 0) {
+    return null
+  }
+
   return (
     <ContentStyled>
       <ContentHeader

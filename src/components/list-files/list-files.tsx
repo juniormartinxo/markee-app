@@ -1,4 +1,4 @@
-import { RefObject } from 'react'
+import { MouseEvent, RefObject } from 'react'
 import {
   ListFilesStyled,
   ItemFilesStyled,
@@ -76,7 +76,10 @@ function ItemFiles({
   refInputFileName,
   refEditorTextArea,
 }: ItemFilesProps) {
-  const handleClick = () => {
+  const handleClick = (e: MouseEvent) => {
+    e.preventDefault()
+    setCurrentFileId(fileId)
+
     const filesNew = files.map((file) => {
       file.active = file.id === fileId
       file.status = file.id === fileId ? 'editing' : 'saved'
@@ -114,9 +117,7 @@ function ItemFiles({
       <LinkFilesStyled
         href={`/file/${fileId}`}
         onClick={(e) => {
-          e.preventDefault()
-          setCurrentFileId(fileId)
-          handleClick()
+          handleClick(e)
         }}
       >
         {!fileActive ? <Icon.File /> : <Icon.FileActive />}
