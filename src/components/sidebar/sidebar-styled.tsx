@@ -8,5 +8,25 @@ const SidebarStyled = styled.div`
     background: ${theme.colors.black};
   `}
 `
+const ButtonAddFileStyle = styled.button`
+  width: 100%;
+  padding: 8px;
+  display: block;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
 
-export default SidebarStyled
+  &:hover {
+    ${({ theme }) => css`
+      background: ${theme.colors.primaryHover};
+      transition: background, 0.5s;
+    `}
+  }
+
+  ${({ theme }) => css`
+    background: ${theme.colors.primary};
+    color: ${theme.colors.lightBlack};
+  `}
+`
+
+export { SidebarStyled, ButtonAddFileStyle }

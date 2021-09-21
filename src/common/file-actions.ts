@@ -27,5 +27,18 @@ export function setFileList(files: FileStorage[]) {
 }
 
 export function getFileList() {
-  return localStorage.getItem('markee-app')
+  const storage = localStorage.getItem('markee-app')
+
+  if (storage !== null) {
+    const files = JSON.parse(storage)
+
+    return files.map((file: FileStorage) => {
+      file.active = false
+      file.status = 'saved'
+
+      return file
+    })
+  } else {
+    return '[]'
+  }
 }

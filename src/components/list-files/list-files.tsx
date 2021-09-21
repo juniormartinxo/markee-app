@@ -1,4 +1,4 @@
-import { RefObject } from 'react'
+import { MouseEvent, RefObject } from 'react'
 import {
   ListFilesStyled,
   ItemFilesStyled,
@@ -17,6 +17,7 @@ type ListFilesProps = {
   files: File[]
   setFiles: Function
   setCurrentFileId: Function
+  setMkdText: Function
   refInputFileName: RefObject<HTMLInputElement>
   refEditorTextArea: RefObject<HTMLTextAreaElement>
 }
@@ -25,6 +26,7 @@ function ListFiles({
   files,
   setFiles,
   setCurrentFileId,
+  setMkdText,
   refInputFileName,
   refEditorTextArea,
 }: ListFilesProps) {
@@ -42,6 +44,7 @@ function ListFiles({
           files={files}
           setFiles={setFiles}
           setCurrentFileId={setCurrentFileId}
+          setMkdText={setMkdText}
           refInputFileName={refInputFileName}
           refEditorTextArea={refEditorTextArea}
         />
@@ -60,6 +63,7 @@ export type ItemFilesProps = {
   files: File[]
   setFiles: Function
   setCurrentFileId: Function
+  setMkdText: Function
   refInputFileName: RefObject<HTMLInputElement>
   refEditorTextArea: RefObject<HTMLTextAreaElement>
 }
@@ -73,10 +77,14 @@ function ItemFiles({
   files,
   setFiles,
   setCurrentFileId,
+  setMkdText,
   refInputFileName,
   refEditorTextArea,
 }: ItemFilesProps) {
-  const handleClick = () => {
+  const handleClick = (e: MouseEvent) => {
+    e.preventDefault()
+    setCurrentFileId(fileId)
+
     const filesNew = files.map((file) => {
       file.active = file.id === fileId
       file.status = file.id === fileId ? 'editing' : 'saved'
@@ -95,6 +103,8 @@ function ItemFiles({
 
     if (refEditorTextArea.current) {
       refEditorTextArea.current.value = fileContent
+
+      setMkdText(fileContent)
     }
   }
   const removeFile = (fileId: string) => {
@@ -114,9 +124,7 @@ function ItemFiles({
       <LinkFilesStyled
         href={`/file/${fileId}`}
         onClick={(e) => {
-          e.preventDefault()
-          setCurrentFileId(fileId)
-          handleClick()
+          handleClick(e)
         }}
       >
         {!fileActive ? <Icon.File /> : <Icon.FileActive />}
