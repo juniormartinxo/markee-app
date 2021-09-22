@@ -61,6 +61,7 @@ function Sidebar({
 
     FileActions.setFileList(newFiles)
   }
+
   return (
     <SidebarStyled>
       <Logo />
