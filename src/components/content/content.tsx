@@ -25,7 +25,8 @@ function Content({
   mkdText,
   setMkdText,
 }: ContentProps) {
-  if (files.length === 0) {
+  console.log('currentFieId', currentFileId)
+  if (files.length === 0 || currentFileId === '') {
     return null
   }
 
