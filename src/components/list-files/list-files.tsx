@@ -110,15 +110,6 @@ function ItemFiles({
       setMkdText(fileContent)
     }
   }
-  /*
-  const removeFile = (fileId: string) => {
-    const filesNew = files.filter((file) => file.id !== fileId)
-
-    setFiles(filesNew)
-
-    FileActions.setFileList(filesNew)
-  }
-  */
 
   return (
     <ItemFilesStyled

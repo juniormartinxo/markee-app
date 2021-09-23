@@ -29,7 +29,6 @@ function Content({
   statusContent,
   setStatusContent,
 }: ContentProps) {
-  console.log('currentFieId', currentFileId)
   if (files.length === 0 || currentFileId === '') {
     setStatusContent(false)
   }
