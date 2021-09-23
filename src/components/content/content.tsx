@@ -14,6 +14,8 @@ type ContentProps = {
   currentFileId: string
   mkdText: string
   setMkdText: Function
+  statusContent: boolean
+  setStatusContent: Function
 }
 
 function Content({
@@ -24,9 +26,15 @@ function Content({
   currentFileId,
   mkdText,
   setMkdText,
+  statusContent,
+  setStatusContent,
 }: ContentProps) {
   console.log('currentFieId', currentFileId)
   if (files.length === 0 || currentFileId === '') {
+    setStatusContent(false)
+  }
+
+  if (!statusContent) {
     return null
   }
 

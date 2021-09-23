@@ -79,7 +79,7 @@ function ContentHeader({
           handleChange()
         }}
         onBlur={handleSave}
-        autoFocus
+        defaultValue="Sem título"
       />
     </ContentHeaderStyled>
   )

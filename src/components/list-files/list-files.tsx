@@ -12,6 +12,7 @@ import * as FileActions from 'common/file-actions'
 import { File, Status } from 'resources/files/types'
 import * as Icon from 'ui/icons'
 import { StatusIconStyled } from 'components/status-icon/status-icon-styled'
+import { useFile } from 'hooks/useFile'
 
 type ListFilesProps = {
   files: File[]
@@ -81,6 +82,8 @@ function ItemFiles({
   refInputFileName,
   refEditorTextArea,
 }: ItemFilesProps) {
+  const { removeFile } = useFile()
+
   const handleClick = (e: MouseEvent) => {
     e.preventDefault()
     setCurrentFileId(fileId)
@@ -107,6 +110,7 @@ function ItemFiles({
       setMkdText(fileContent)
     }
   }
+  /*
   const removeFile = (fileId: string) => {
     const filesNew = files.filter((file) => file.id !== fileId)
 
@@ -114,6 +118,7 @@ function ItemFiles({
 
     FileActions.setFileList(filesNew)
   }
+  */
 
   return (
     <ItemFilesStyled
@@ -137,7 +142,7 @@ function ItemFiles({
           title={`Remover o arquivo ${fileName}`}
           onClick={(e) => {
             e.preventDefault()
-            removeFile(fileId)
+            removeFile({ files, fileId, setFiles })
           }}
         >
           <Icon.FileRemove />

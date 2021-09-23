@@ -5,8 +5,7 @@ import { TitleLinethrough } from 'components/title-linethrough'
 import { ContainerButtonsSidebar } from 'components/container-buttons-sidebar'
 import { ListFiles } from 'components/list-files'
 import { File } from 'resources/files/types'
-import { v4 as uuidv4 } from 'uuid'
-import * as FileActions from 'common/file-actions'
+import { useFile } from 'hooks/useFile'
 
 type SidebarProps = {
   refInputFileName: RefObject<HTMLInputElement>
@@ -15,6 +14,7 @@ type SidebarProps = {
   setFiles: Function
   setCurrentFileId: Function
   setMkdText: Function
+  setStatusContent: Function
 }
 
 function Sidebar({
@@ -24,50 +24,28 @@ function Sidebar({
   setFiles,
   setCurrentFileId,
   setMkdText,
+  setStatusContent,
 }: SidebarProps) {
-  const addFile = () => {
-    const fileId = uuidv4()
-
-    const fileItem = {
-      id: fileId,
-      name: 'Sem título',
-      content: '',
-      active: true,
-      status: 'saved',
-    }
-
-    setCurrentFileId(fileItem.id)
-
-    if (refInputFileName.current) {
-      refInputFileName.current.value = fileItem.name
-
-      refInputFileName.current.focus()
-    }
-
-    if (refEditorTextArea.current) {
-      refEditorTextArea.current.value = fileItem.content
-
-      setMkdText(fileItem.content)
-    }
-
-    const filesNew = files.map((file) => {
-      file.active = false
-      return file
-    })
-
-    const newFiles = [fileItem, ...filesNew]
-
-    setFiles(newFiles)
-
-    FileActions.setFileList(newFiles)
-  }
+  const { addFile } = useFile()
 
   return (
     <SidebarStyled>
       <Logo />
       <TitleLinethrough>Arquivos</TitleLinethrough>
       <ContainerButtonsSidebar>
-        <ButtonAddFileStyle onClick={addFile}>
+        <ButtonAddFileStyle
+          onClick={() => {
+            addFile({
+              files,
+              setFiles,
+              setCurrentFileId,
+              refInputFileName,
+              refEditorTextArea,
+              setMkdText,
+              setStatusContent,
+            })
+          }}
+        >
           + Adicionar arquivo
         </ButtonAddFileStyle>
       </ContainerButtonsSidebar>
