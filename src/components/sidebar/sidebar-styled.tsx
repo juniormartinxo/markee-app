@@ -29,4 +29,8 @@ const ButtonAddFileStyle = styled.button`
   `}
 `
 
-export { SidebarStyled, ButtonAddFileStyle }
+const ContainerButtonsSidebarStyled = styled.div`
+  padding: 15px;
+`
+
+export { SidebarStyled, ButtonAddFileStyle, ContainerButtonsSidebarStyled }
