@@ -17,7 +17,6 @@ type AddFileType = {
   refInputFileName: RefObject<HTMLInputElement>
   refEditorTextArea: RefObject<HTMLTextAreaElement>
   setMkdText: Function
-  setStatusContent: Function
 }
 
 type RemoveFileType = {
@@ -26,8 +25,52 @@ type RemoveFileType = {
   setFiles: Function
 }
 
+type OnSelectedType = {
+  files: File[]
+  fileId: string
+  fileName: string
+  fileContent: string
+  refInputFileName: RefObject<HTMLInputElement>
+  refEditorTextArea: RefObject<HTMLTextAreaElement>
+  setFiles: Function
+  setMkdText: Function
+}
+
 export function useFile() {
   const keyApp = 'markee-app'
+
+  const onSelected = ({
+    files,
+    fileId,
+    fileName,
+    fileContent,
+    refInputFileName,
+    refEditorTextArea,
+    setFiles,
+    setMkdText,
+  }: OnSelectedType) => {
+    const filesNew = files.map((file) => {
+      file.active = file.id === fileId
+      file.status = file.id === fileId ? 'editing' : 'saved'
+
+      return file
+    })
+
+    setFiles(filesNew)
+
+    localForage.setItem(keyApp, JSON.stringify(filesNew))
+
+    if (refInputFileName.current) {
+      refInputFileName.current.value = fileName
+      refInputFileName.current.focus()
+    }
+
+    if (refEditorTextArea.current) {
+      refEditorTextArea.current.value = fileContent
+
+      setMkdText(fileContent)
+    }
+  }
 
   const addFile = ({
     files,
@@ -36,10 +79,7 @@ export function useFile() {
     refInputFileName,
     refEditorTextArea,
     setMkdText,
-    setStatusContent,
   }: AddFileType) => {
-    setStatusContent(true)
-
     const fileId = uuidv4()
 
     const fileItem = {
@@ -78,8 +118,8 @@ export function useFile() {
   const editFiles = ({
     files,
     currentFileId,
-    setFiles,
     refInputFileName,
+    setFiles,
   }: UseFileType) => {
     const filesNew = files.map((file) => {
       file.active = file.id === currentFileId
@@ -102,8 +142,8 @@ export function useFile() {
   const saveFiles = ({
     files,
     currentFileId,
-    setFiles,
     refInputFileName,
+    setFiles,
   }: UseFileType) => {
     const filesNew = files.map((file) => {
       file.active = file.id === currentFileId
@@ -123,11 +163,6 @@ export function useFile() {
     })
   }
 
-  function getFiles() {
-    if (!localForage.getItem(keyApp)) return
-    return localForage.getItem(keyApp)
-  }
-
   function removeFile({ files, fileId, setFiles }: RemoveFileType) {
     const filesNew = files.filter((file) => file.id !== fileId)
 
@@ -141,6 +176,6 @@ export function useFile() {
     editFiles,
     saveFiles,
     removeFile,
-    getFiles,
+    onSelected,
   }
 }

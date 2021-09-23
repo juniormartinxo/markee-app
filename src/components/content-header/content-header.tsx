@@ -3,6 +3,7 @@ import { ContentHeaderStyled, InputFileStyled } from './content-header-styled'
 import * as Icon from 'ui/icons'
 import * as FileActions from 'common/file-actions'
 import { File } from 'resources/files/types'
+import { useFile } from 'hooks/useFile'
 
 type ContentHeaderProps = {
   refInputFileName: RefObject<HTMLInputElement>
@@ -17,39 +18,8 @@ function ContentHeader({
   files,
   setFiles,
 }: ContentHeaderProps) {
+  const { editFiles, saveFiles } = useFile()
   const [timer, setTimer] = useState(setTimeout(() => {}, 300))
-
-  const handleEditFile = () => {
-    const filesNew = files.map((file) => {
-      file.active = file.id === currentFileId
-      file.status = file.id === currentFileId ? 'saving' : 'saved'
-
-      return file
-    })
-
-    setFiles(filesNew)
-
-    FileActions.setFileList(filesNew)
-
-    setTimeout(handleSave, 300)
-  }
-
-  const handleSave = () => {
-    const filesNew = files.map((file) => {
-      file.active = file.id === currentFileId
-      file.status = file.id === currentFileId ? 'saved' : 'saved'
-      file.name =
-        file.id === currentFileId
-          ? refInputFileName.current?.value ?? file.name
-          : file.name
-
-      return file
-    })
-
-    setFiles(filesNew)
-
-    FileActions.setFileList(filesNew)
-  }
 
   const handleChange = () => {
     const filesNew = files.map((file) => {
@@ -75,10 +45,18 @@ function ContentHeader({
         ref={refInputFileName}
         onChange={() => {
           clearTimeout(timer)
-          setTimer(setTimeout(handleEditFile, 300))
+
+          setTimer(
+            setTimeout(() => {
+              editFiles({ files, currentFileId, refInputFileName, setFiles })
+            }, 300),
+          )
+
           handleChange()
         }}
-        onBlur={handleSave}
+        onBlur={() => {
+          saveFiles({ files, currentFileId, refInputFileName, setFiles })
+        }}
         defaultValue="Sem título"
       />
     </ContentHeaderStyled>

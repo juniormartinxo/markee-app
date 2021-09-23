@@ -1,8 +1,11 @@
 import { RefObject } from 'react'
 import { Logo } from 'components/logo'
-import { SidebarStyled, ButtonAddFileStyle } from './sidebar-styled'
+import {
+  SidebarStyled,
+  ButtonAddFileStyle,
+  ContainerButtonsSidebarStyled,
+} from './sidebar-styled'
 import { TitleLinethrough } from 'components/title-linethrough'
-import { ContainerButtonsSidebar } from 'components/container-buttons-sidebar'
 import { ListFiles } from 'components/list-files'
 import { File } from 'resources/files/types'
 import { useFile } from 'hooks/useFile'
@@ -14,7 +17,6 @@ type SidebarProps = {
   setFiles: Function
   setCurrentFileId: Function
   setMkdText: Function
-  setStatusContent: Function
 }
 
 function Sidebar({
@@ -24,7 +26,6 @@ function Sidebar({
   setFiles,
   setCurrentFileId,
   setMkdText,
-  setStatusContent,
 }: SidebarProps) {
   const { addFile } = useFile()
 
@@ -32,7 +33,7 @@ function Sidebar({
     <SidebarStyled>
       <Logo />
       <TitleLinethrough>Arquivos</TitleLinethrough>
-      <ContainerButtonsSidebar>
+      <ContainerButtonsSidebarStyled>
         <ButtonAddFileStyle
           onClick={() => {
             addFile({
@@ -42,13 +43,12 @@ function Sidebar({
               refInputFileName,
               refEditorTextArea,
               setMkdText,
-              setStatusContent,
             })
           }}
         >
           + Adicionar arquivo
         </ButtonAddFileStyle>
-      </ContainerButtonsSidebar>
+      </ContainerButtonsSidebarStyled>
       <ListFiles
         files={files}
         setFiles={setFiles}

@@ -1,9 +1,8 @@
 import { RefObject } from 'react'
-import ContentStyled from './content-styled'
+import { ContentStyled, ContentEditorStyled } from './content-styled'
 import { Editor } from 'components/editor'
 import { Viewer } from 'components/viewer'
 import { ContentHeader } from 'components/content-header'
-import { ContentEditor } from 'components/content-editor'
 import { File } from 'resources/files/types'
 
 type ContentProps = {
@@ -14,8 +13,6 @@ type ContentProps = {
   currentFileId: string
   mkdText: string
   setMkdText: Function
-  statusContent: boolean
-  setStatusContent: Function
 }
 
 function Content({
@@ -26,14 +23,8 @@ function Content({
   currentFileId,
   mkdText,
   setMkdText,
-  statusContent,
-  setStatusContent,
 }: ContentProps) {
   if (files.length === 0 || currentFileId === '') {
-    setStatusContent(false)
-  }
-
-  if (!statusContent) {
     return null
   }
 
@@ -45,7 +36,7 @@ function Content({
         setFiles={setFiles}
         currentFileId={currentFileId}
       />
-      <ContentEditor>
+      <ContentEditorStyled>
         <Editor
           setMkdText={setMkdText}
           currentFileId={currentFileId}
@@ -54,7 +45,7 @@ function Content({
           refEditorTextArea={refEditorTextArea}
         />
         <Viewer mkdText={mkdText} />
-      </ContentEditor>
+      </ContentEditorStyled>
     </ContentStyled>
   )
 }
