@@ -74,8 +74,8 @@ export function useFile() {
   const editFiles = ({
     files,
     currentFileId,
-    setFiles,
     refInputFileName,
+    setFiles,
   }: UseFileType) => {
     const filesNew = files.map((file) => {
       file.active = file.id === currentFileId
@@ -98,8 +98,8 @@ export function useFile() {
   const saveFiles = ({
     files,
     currentFileId,
-    setFiles,
     refInputFileName,
+    setFiles,
   }: UseFileType) => {
     const filesNew = files.map((file) => {
       file.active = file.id === currentFileId
