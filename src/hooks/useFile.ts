@@ -17,7 +17,6 @@ type AddFileType = {
   refInputFileName: RefObject<HTMLInputElement>
   refEditorTextArea: RefObject<HTMLTextAreaElement>
   setMkdText: Function
-  setStatusContent: Function
 }
 
 type RemoveFileType = {
@@ -36,10 +35,7 @@ export function useFile() {
     refInputFileName,
     refEditorTextArea,
     setMkdText,
-    setStatusContent,
   }: AddFileType) => {
-    setStatusContent(true)
-
     const fileId = uuidv4()
 
     const fileItem = {

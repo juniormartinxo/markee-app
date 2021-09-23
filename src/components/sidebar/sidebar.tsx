@@ -17,7 +17,6 @@ type SidebarProps = {
   setFiles: Function
   setCurrentFileId: Function
   setMkdText: Function
-  setStatusContent: Function
 }
 
 function Sidebar({
@@ -27,7 +26,6 @@ function Sidebar({
   setFiles,
   setCurrentFileId,
   setMkdText,
-  setStatusContent,
 }: SidebarProps) {
   const { addFile } = useFile()
 
@@ -45,7 +43,6 @@ function Sidebar({
               refInputFileName,
               refEditorTextArea,
               setMkdText,
-              setStatusContent,
             })
           }}
         >
