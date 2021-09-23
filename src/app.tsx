@@ -5,7 +5,6 @@ import { Sidebar } from 'components/sidebar'
 import * as localForage from 'localforage'
 
 function App() {
-  const [statusContent, setStatusContent] = useState(true)
   const [currentFileId, setCurrentFileId] = useState('')
   const [mkdText, setMkdText] = useState('')
 
@@ -34,7 +33,6 @@ function App() {
         setMkdText={setMkdText}
         setFiles={setFiles}
         files={files}
-        setStatusContent={setStatusContent}
       />
       <Content
         refInputFileName={refInputFileName}
@@ -44,8 +42,6 @@ function App() {
         files={files}
         mkdText={mkdText}
         setMkdText={setMkdText}
-        statusContent={statusContent}
-        setStatusContent={setStatusContent}
       />
     </Main>
   )
