@@ -7,6 +7,7 @@ type UseFileType = {
   files: File[]
   currentFileId: string
   refInputFileName: RefObject<HTMLInputElement>
+  refEditorTextArea: RefObject<HTMLTextAreaElement>
   setFiles: Function
 }
 
@@ -38,6 +39,33 @@ type OnSelectedType = {
 
 export function useFile() {
   const keyApp = 'markee-app'
+
+  const onChange = ({
+    files,
+    currentFileId,
+    refInputFileName,
+    refEditorTextArea,
+    setFiles,
+  }: UseFileType) => {
+    const filesNew = files.map((file) => {
+      file.active = file.id === currentFileId
+      file.status = file.id === currentFileId ? 'editing' : 'saved'
+      file.name =
+        file.id === currentFileId
+          ? refInputFileName.current?.value ?? file.name
+          : file.name
+      file.content =
+        file.id === currentFileId
+          ? refEditorTextArea.current?.value ?? file.content
+          : file.content
+
+      return file
+    })
+
+    setFiles(filesNew)
+
+    localForage.setItem(keyApp, JSON.stringify(filesNew))
+  }
 
   const onSelected = ({
     files,
@@ -119,6 +147,7 @@ export function useFile() {
     files,
     currentFileId,
     refInputFileName,
+    refEditorTextArea,
     setFiles,
   }: UseFileType) => {
     const filesNew = files.map((file) => {
@@ -132,7 +161,13 @@ export function useFile() {
 
     localForage.setItem(keyApp, JSON.stringify(filesNew)).then(() => {
       setTimeout(() => {
-        saveFiles({ files, currentFileId, setFiles, refInputFileName })
+        saveFiles({
+          files,
+          currentFileId,
+          refInputFileName,
+          refEditorTextArea,
+          setFiles,
+        })
       }, 300)
 
       console.log('Arquivos salvos com sucesso!')
@@ -143,6 +178,7 @@ export function useFile() {
     files,
     currentFileId,
     refInputFileName,
+    refEditorTextArea,
     setFiles,
   }: UseFileType) => {
     const filesNew = files.map((file) => {
@@ -152,6 +188,10 @@ export function useFile() {
         file.id === currentFileId
           ? refInputFileName.current?.value ?? file.name
           : file.name
+      file.content =
+        file.id === currentFileId
+          ? refEditorTextArea.current?.value ?? file.content
+          : file.content
 
       return file
     })
@@ -177,5 +217,6 @@ export function useFile() {
     saveFiles,
     removeFile,
     onSelected,
+    onChange,
   }
 }

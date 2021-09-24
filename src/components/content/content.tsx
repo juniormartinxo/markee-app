@@ -32,6 +32,7 @@ function Content({
     <ContentStyled>
       <ContentHeader
         refInputFileName={refInputFileName}
+        refEditorTextArea={refEditorTextArea}
         files={files}
         setFiles={setFiles}
         currentFileId={currentFileId}

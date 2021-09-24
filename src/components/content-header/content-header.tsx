@@ -7,6 +7,7 @@ import { useFile } from 'hooks/useFile'
 
 type ContentHeaderProps = {
   refInputFileName: RefObject<HTMLInputElement>
+  refEditorTextArea: RefObject<HTMLTextAreaElement>
   currentFileId: string
   files: File[]
   setFiles: Function
@@ -14,29 +15,13 @@ type ContentHeaderProps = {
 
 function ContentHeader({
   refInputFileName,
+  refEditorTextArea,
   currentFileId,
   files,
   setFiles,
 }: ContentHeaderProps) {
-  const { editFiles, saveFiles } = useFile()
+  const { editFiles, saveFiles, onChange } = useFile()
   const [timer, setTimer] = useState(setTimeout(() => {}, 300))
-
-  const handleChange = () => {
-    const filesNew = files.map((file) => {
-      file.active = file.id === currentFileId
-      file.status = file.id === currentFileId ? 'editing' : 'saved'
-      file.name =
-        file.id === currentFileId
-          ? refInputFileName.current?.value ?? file.name
-          : file.name
-
-      return file
-    })
-
-    setFiles(filesNew)
-
-    FileActions.setFileList(filesNew)
-  }
 
   return (
     <ContentHeaderStyled>
@@ -48,14 +33,32 @@ function ContentHeader({
 
           setTimer(
             setTimeout(() => {
-              editFiles({ files, currentFileId, refInputFileName, setFiles })
+              editFiles({
+                files,
+                currentFileId,
+                refInputFileName,
+                refEditorTextArea,
+                setFiles,
+              })
             }, 300),
           )
 
-          handleChange()
+          onChange({
+            files,
+            currentFileId,
+            refInputFileName,
+            refEditorTextArea,
+            setFiles,
+          })
         }}
         onBlur={() => {
-          saveFiles({ files, currentFileId, refInputFileName, setFiles })
+          saveFiles({
+            files,
+            currentFileId,
+            refInputFileName,
+            refEditorTextArea,
+            setFiles,
+          })
         }}
         defaultValue="Sem título"
       />
