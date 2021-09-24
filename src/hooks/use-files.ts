@@ -37,7 +37,7 @@ type OnSelectedType = {
   setMkdText: Function
 }
 
-export function useFile() {
+export function useFiles() {
   const keyApp = 'markee-app'
 
   const onChange = ({
@@ -169,8 +169,6 @@ export function useFile() {
           setFiles,
         })
       }, 300)
-
-      console.log('Arquivos salvos com sucesso!')
     })
   }
 

@@ -14,6 +14,5 @@ export function StatusIcon({ status = 'saved', className }: StatusIconProps) {
     editing: Edit,
   }[status]
 
-  // if (!Comp) return null
   return <Comp className={className} />
 }

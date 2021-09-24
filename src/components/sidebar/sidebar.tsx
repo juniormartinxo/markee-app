@@ -8,7 +8,7 @@ import {
 import { TitleLinethrough } from 'components/title-linethrough'
 import { ListFiles } from 'components/list-files'
 import { File } from 'resources/files/types'
-import { useFile } from 'hooks/useFile'
+import { useFiles } from 'hooks/use-files'
 
 type SidebarProps = {
   refInputFileName: RefObject<HTMLInputElement>
@@ -27,7 +27,7 @@ function Sidebar({
   setCurrentFileId,
   setMkdText,
 }: SidebarProps) {
-  const { addFile } = useFile()
+  const { addFile } = useFiles()
 
   return (
     <SidebarStyled>

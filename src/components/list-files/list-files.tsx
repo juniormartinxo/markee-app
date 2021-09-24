@@ -10,7 +10,7 @@ import {
 import { File, Status } from 'resources/files/types'
 import * as Icon from 'ui/icons'
 import { StatusIconStyled } from 'components/status-icon/status-icon-styled'
-import { useFile } from 'hooks/useFile'
+import { useFiles } from 'hooks/use-files'
 
 type ListFilesProps = {
   files: File[]
@@ -80,7 +80,7 @@ function ItemFiles({
   refInputFileName,
   refEditorTextArea,
 }: ItemFilesProps) {
-  const { onSelected, removeFile } = useFile()
+  const { onSelected, removeFile } = useFiles()
 
   return (
     <ItemFilesStyled

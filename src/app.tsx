@@ -13,15 +13,15 @@ function App() {
   const refEditorTextArea = useRef<HTMLTextAreaElement | null>(null)
 
   useEffect(() => {
-    async function getFiles() {
-      const files = await localForage.getItem('markee-app')
+    async function getFilesStorage() {
+      const filesStorage = await localForage.getItem('markee-app')
 
-      if (typeof files === 'string') {
-        setFiles(JSON.parse(files))
+      if (typeof filesStorage === 'string') {
+        setFiles(JSON.parse(filesStorage))
       }
     }
 
-    getFiles()
+    getFilesStorage()
   }, [])
 
   return (

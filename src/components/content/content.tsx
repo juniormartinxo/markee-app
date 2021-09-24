@@ -24,7 +24,7 @@ function Content({
   mkdText,
   setMkdText,
 }: ContentProps) {
-  if (files.length === 0 || currentFileId === '') {
+  if (files.length === 0) {
     return null
   }
 
@@ -44,6 +44,7 @@ function Content({
           files={files}
           setFiles={setFiles}
           refEditorTextArea={refEditorTextArea}
+          refInputFileName={refInputFileName}
         />
         <Viewer mkdText={mkdText} />
       </ContentEditorStyled>

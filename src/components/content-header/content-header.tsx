@@ -1,9 +1,8 @@
 import { useState, RefObject } from 'react'
 import { ContentHeaderStyled, InputFileStyled } from './content-header-styled'
 import * as Icon from 'ui/icons'
-import * as FileActions from 'common/file-actions'
 import { File } from 'resources/files/types'
-import { useFile } from 'hooks/useFile'
+import { useFiles } from 'hooks/use-files'
 
 type ContentHeaderProps = {
   refInputFileName: RefObject<HTMLInputElement>
@@ -20,7 +19,7 @@ function ContentHeader({
   files,
   setFiles,
 }: ContentHeaderProps) {
-  const { editFiles, saveFiles, onChange } = useFile()
+  const { editFiles, saveFiles, onChange } = useFiles()
   const [timer, setTimer] = useState(setTimeout(() => {}, 300))
 
   return (
