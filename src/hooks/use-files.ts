@@ -98,6 +98,8 @@ export function useFiles() {
 
       setMkdText(fileContent)
     }
+
+    window.history.replaceState(null, '', `/file/${fileId}`)
   }
 
   const addFile = ({
@@ -141,6 +143,8 @@ export function useFiles() {
     setFiles(newFiles)
 
     localForage.setItem(keyApp, JSON.stringify(filesNew))
+
+    window.history.replaceState(null, '', `/file/${fileId}`)
   }
 
   const editFiles = ({

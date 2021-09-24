@@ -3,6 +3,7 @@ import { Content } from 'components/content'
 import Main from 'components/main/main'
 import { Sidebar } from 'components/sidebar'
 import * as localForage from 'localforage'
+import { File } from 'resources/files/types'
 
 function App() {
   const [currentFileId, setCurrentFileId] = useState('')
@@ -14,7 +15,7 @@ function App() {
 
   useEffect(() => {
     async function getFilesStorage() {
-      const filesStorage = await localForage.getItem('markee-app')
+      const filesStorage = await localForage.getItem<File[]>('markee-app')
 
       if (typeof filesStorage === 'string') {
         setFiles(JSON.parse(filesStorage))
@@ -23,6 +24,28 @@ function App() {
 
     getFilesStorage()
   }, [])
+
+  useEffect(() => {
+    const fileActive = files.filter((file: File) => file.active === true)
+
+    fileActive.map((file: File) => {
+      setCurrentFileId(file.id)
+      setMkdText(file.content)
+      window.history.replaceState(null, '', `/file/${file.id}`)
+
+      if (refInputFileName.current) {
+        refInputFileName.current.value = file.name
+      }
+
+      if (refEditorTextArea.current) {
+        refEditorTextArea.current.value = file.content
+      }
+
+      return null
+    })
+
+    console.log('fileActive', fileActive)
+  }, [files])
 
   return (
     <Main>
