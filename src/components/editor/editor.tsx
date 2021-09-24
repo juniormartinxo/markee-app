@@ -1,13 +1,14 @@
-import { useState, RefObject, ChangeEvent } from 'react'
+import { useState, RefObject } from 'react'
 import { EditorStyled, TextEditorStyled } from './editor-styled'
 import { File } from 'resources/files/types'
-import * as FileActions from 'common/file-actions'
+import { useFiles } from 'hooks/use-files'
 
 type EditorProps = {
   files: File[]
   currentFileId: string
   setFiles: Function
   setMkdText: Function
+  refInputFileName: RefObject<HTMLInputElement>
   refEditorTextArea: RefObject<HTMLTextAreaElement>
 }
 
@@ -16,60 +17,11 @@ function Editor({
   currentFileId,
   setFiles,
   setMkdText,
+  refInputFileName,
   refEditorTextArea,
 }: EditorProps) {
+  const { editFiles, saveFiles, onChange } = useFiles()
   const [timer, setTimer] = useState(setTimeout(() => {}, 300))
-
-  const handleEditFile = () => {
-    const filesNew = files.map((file) => {
-      file.active = file.id === currentFileId
-      file.status = file.id === currentFileId ? 'saving' : 'saved'
-
-      return file
-    })
-
-    setFiles(filesNew)
-
-    FileActions.setFileList(filesNew)
-
-    setTimeout(handleSave, 300)
-  }
-
-  const handleSave = () => {
-    const filesNew = files.map((file) => {
-      file.active = file.id === currentFileId
-      file.status = file.id === currentFileId ? 'saved' : 'saved'
-      file.content =
-        file.id === currentFileId
-          ? refEditorTextArea.current?.value ?? file.content
-          : file.content
-
-      return file
-    })
-
-    setFiles(filesNew)
-
-    FileActions.setFileList(filesNew)
-  }
-
-  const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    setMkdText(e.target.value)
-
-    const filesNew = files.map((file) => {
-      file.active = file.id === currentFileId
-      file.status = file.id === currentFileId ? 'editing' : 'saved'
-      file.content =
-        file.id === currentFileId
-          ? refEditorTextArea.current?.value ?? file.content
-          : file.content
-
-      return file
-    })
-
-    setFiles(filesNew)
-
-    FileActions.setFileList(filesNew)
-  }
 
   return (
     <EditorStyled>
@@ -79,11 +31,38 @@ function Editor({
         placeholder="Digite aqui o seu markdown"
         ref={refEditorTextArea}
         onChange={(e) => {
+          setMkdText(e.target.value)
+
           clearTimeout(timer)
-          setTimer(setTimeout(handleEditFile, 300))
-          handleChange(e)
+
+          setTimer(
+            setTimeout(() => {
+              editFiles({
+                files,
+                currentFileId,
+                refInputFileName,
+                refEditorTextArea,
+                setFiles,
+              })
+            }, 300),
+          )
+          onChange({
+            files,
+            currentFileId,
+            refInputFileName,
+            refEditorTextArea,
+            setFiles,
+          })
         }}
-        onBlur={handleSave}
+        onBlur={() => {
+          saveFiles({
+            files,
+            currentFileId,
+            refInputFileName,
+            refEditorTextArea,
+            setFiles,
+          })
+        }}
       />
     </EditorStyled>
   )

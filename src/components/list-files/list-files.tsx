@@ -1,4 +1,4 @@
-import { MouseEvent, RefObject } from 'react'
+import { RefObject } from 'react'
 import {
   ListFilesStyled,
   ItemFilesStyled,
@@ -7,11 +7,10 @@ import {
   TextLinkStyled,
 } from './list-files-styled'
 
-import * as FileActions from 'common/file-actions'
-
 import { File, Status } from 'resources/files/types'
 import * as Icon from 'ui/icons'
 import { StatusIconStyled } from 'components/status-icon/status-icon-styled'
+import { useFiles } from 'hooks/use-files'
 
 type ListFilesProps = {
   files: File[]
@@ -81,39 +80,7 @@ function ItemFiles({
   refInputFileName,
   refEditorTextArea,
 }: ItemFilesProps) {
-  const handleClick = (e: MouseEvent) => {
-    e.preventDefault()
-    setCurrentFileId(fileId)
-
-    const filesNew = files.map((file) => {
-      file.active = file.id === fileId
-      file.status = file.id === fileId ? 'editing' : 'saved'
-
-      return file
-    })
-
-    setFiles(filesNew)
-
-    FileActions.setFileList(filesNew)
-
-    if (refInputFileName.current) {
-      refInputFileName.current.value = fileName
-      refInputFileName.current.focus()
-    }
-
-    if (refEditorTextArea.current) {
-      refEditorTextArea.current.value = fileContent
-
-      setMkdText(fileContent)
-    }
-  }
-  const removeFile = (fileId: string) => {
-    const filesNew = files.filter((file) => file.id !== fileId)
-
-    setFiles(filesNew)
-
-    FileActions.setFileList(filesNew)
-  }
+  const { onSelected, removeFile } = useFiles()
 
   return (
     <ItemFilesStyled
@@ -124,7 +91,19 @@ function ItemFiles({
       <LinkFilesStyled
         href={`/file/${fileId}`}
         onClick={(e) => {
-          handleClick(e)
+          e.preventDefault()
+          setCurrentFileId(fileId)
+
+          onSelected({
+            files,
+            fileId,
+            fileName,
+            fileContent,
+            refInputFileName,
+            refEditorTextArea,
+            setFiles,
+            setMkdText,
+          })
         }}
       >
         {!fileActive ? <Icon.File /> : <Icon.FileActive />}
@@ -137,7 +116,7 @@ function ItemFiles({
           title={`Remover o arquivo ${fileName}`}
           onClick={(e) => {
             e.preventDefault()
-            removeFile(fileId)
+            removeFile({ files, fileId, setFiles })
           }}
         >
           <Icon.FileRemove />

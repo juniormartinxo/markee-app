@@ -1,9 +1,8 @@
 import { RefObject } from 'react'
-import ContentStyled from './content-styled'
+import { ContentStyled, ContentEditorStyled } from './content-styled'
 import { Editor } from 'components/editor'
 import { Viewer } from 'components/viewer'
 import { ContentHeader } from 'components/content-header'
-import { ContentEditor } from 'components/content-editor'
 import { File } from 'resources/files/types'
 
 type ContentProps = {
@@ -33,20 +32,22 @@ function Content({
     <ContentStyled>
       <ContentHeader
         refInputFileName={refInputFileName}
+        refEditorTextArea={refEditorTextArea}
         files={files}
         setFiles={setFiles}
         currentFileId={currentFileId}
       />
-      <ContentEditor>
+      <ContentEditorStyled>
         <Editor
           setMkdText={setMkdText}
           currentFileId={currentFileId}
           files={files}
           setFiles={setFiles}
           refEditorTextArea={refEditorTextArea}
+          refInputFileName={refInputFileName}
         />
         <Viewer mkdText={mkdText} />
-      </ContentEditor>
+      </ContentEditorStyled>
     </ContentStyled>
   )
 }

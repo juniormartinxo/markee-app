@@ -1,12 +1,14 @@
 import { RefObject } from 'react'
 import { Logo } from 'components/logo'
-import { SidebarStyled, ButtonAddFileStyle } from './sidebar-styled'
+import {
+  SidebarStyled,
+  ButtonAddFileStyle,
+  ContainerButtonsSidebarStyled,
+} from './sidebar-styled'
 import { TitleLinethrough } from 'components/title-linethrough'
-import { ContainerButtonsSidebar } from 'components/container-buttons-sidebar'
 import { ListFiles } from 'components/list-files'
 import { File } from 'resources/files/types'
-import { v4 as uuidv4 } from 'uuid'
-import * as FileActions from 'common/file-actions'
+import { useFiles } from 'hooks/use-files'
 
 type SidebarProps = {
   refInputFileName: RefObject<HTMLInputElement>
@@ -25,51 +27,28 @@ function Sidebar({
   setCurrentFileId,
   setMkdText,
 }: SidebarProps) {
-  const addFile = () => {
-    const fileId = uuidv4()
+  const { addFile } = useFiles()
 
-    const fileItem = {
-      id: fileId,
-      name: 'Sem título',
-      content: '',
-      active: true,
-      status: 'saved',
-    }
-
-    setCurrentFileId(fileItem.id)
-
-    if (refInputFileName.current) {
-      refInputFileName.current.value = fileItem.name
-
-      refInputFileName.current.focus()
-    }
-
-    if (refEditorTextArea.current) {
-      refEditorTextArea.current.value = fileItem.content
-
-      setMkdText(fileItem.content)
-    }
-
-    const filesNew = files.map((file) => {
-      file.active = false
-      return file
-    })
-
-    const newFiles = [fileItem, ...filesNew]
-
-    setFiles(newFiles)
-
-    FileActions.setFileList(newFiles)
-  }
   return (
     <SidebarStyled>
       <Logo />
       <TitleLinethrough>Arquivos</TitleLinethrough>
-      <ContainerButtonsSidebar>
-        <ButtonAddFileStyle onClick={addFile}>
+      <ContainerButtonsSidebarStyled>
+        <ButtonAddFileStyle
+          onClick={() => {
+            addFile({
+              files,
+              setFiles,
+              setCurrentFileId,
+              refInputFileName,
+              refEditorTextArea,
+              setMkdText,
+            })
+          }}
+        >
           + Adicionar arquivo
         </ButtonAddFileStyle>
-      </ContainerButtonsSidebar>
+      </ContainerButtonsSidebarStyled>
       <ListFiles
         files={files}
         setFiles={setFiles}
