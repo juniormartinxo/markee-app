@@ -69,22 +69,29 @@ const ItemFilesStyled = styled.li<ItemFilesStyledProps>`
 `
 
 const LinkFilesStyled = styled.a`
+  width: 100%;
+  padding: 15px 10px;
+  text-decoration: none;
+  align-self: center;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  font-weight: 400;
+  line-height: 20.83px;
+
   ${({ theme }) => css`
-    width: 100%;
-    padding: 15px 10px;
-    text-decoration: none;
-    align-self: center;
-    border-radius: 3px;
-    display: flex;
-    align-items: center;
     color: ${theme.colors.white};
     font-family: ${theme.fonts.secondary};
-    font-weight: 400;
-    line-height: 20.83px;
   `}
 `
 
 const TextLinkStyled = styled.span`
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+  width: 80%;
+
   ${({ theme }) => css`
     color: ${theme.colors.white};
     font-family: ${theme.fonts.secondary};
