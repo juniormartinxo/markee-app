@@ -200,9 +200,7 @@ export function useFiles() {
 
     setFiles(filesNew)
 
-    localForage.setItem(keyApp, JSON.stringify(filesNew)).then(() => {
-      console.log('Arquivos salvos com sucesso!')
-    })
+    localForage.setItem(keyApp, JSON.stringify(filesNew))
   }
 
   function removeFile({ files, fileId, setFiles }: RemoveFileType) {

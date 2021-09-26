@@ -43,8 +43,6 @@ function App() {
 
       return null
     })
-
-    console.log('fileActive', fileActive)
   }, [files])
 
   return (
