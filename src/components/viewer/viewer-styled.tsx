@@ -16,12 +16,22 @@ const ViewerStyled = styled.div`
     margin: 0;
   }
 
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    overflow-wrap: anywhere;
+  }
+
   pre {
     padding: 15px;
     background: #f3f3f387;
     border-radius: 2px;
     border: 1px solid #e7e7e7;
     margin: 0;
+    white-space: pre-wrap;
   }
 `
 
