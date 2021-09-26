@@ -16,8 +16,10 @@ const ContentStyled = styled.div`
 
 const ContentEditorStyled = styled.div`
   grid-area: content-editor;
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  justify-content: center;
+
   ${({ theme }) => css`
     font-family: ${theme.fonts.primary};
     font-weight: 500;

@@ -1,9 +1,10 @@
 import styled, { css } from 'styled-components/macro'
 
 const ViewerStyled = styled.div`
-  width: 40vw;
+  width: 100%;
   padding: 0 10px 0 25px;
   margin: 0 0 15px 0;
+  min-height: 300px;
 
   ${({ theme }) => css`
     font-family: ${theme.fonts.secondary};

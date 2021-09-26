@@ -2,10 +2,13 @@ import styled, { css } from 'styled-components/macro'
 
 const SidebarStyled = styled.div`
   grid-area: sidebar;
-  height: 100vh;
   ${({ theme }) => css`
     background: ${theme.colors.black};
   `}
+
+  @media (min-width: 601px) {
+    height: 100vh;
+  }
 `
 const ButtonAddFileStyle = styled.button`
   width: 100%;

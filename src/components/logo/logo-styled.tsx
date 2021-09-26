@@ -4,7 +4,7 @@ const LogoBox = styled.div`
   padding: 10px;
   display: flex;
   justify-content: center;
-  margin-top: 47.42px;
+  margin-top: 30px;
 `
 
 const LogoImg = styled.img`
